@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">.prova {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>min-width: 1440px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>min-height: 3320px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: relative;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2851px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -179px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1859px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 503px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1030px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 170px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 973px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .div {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 455px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 193px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1103px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .viaggio-nella-bolla {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 545px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 365px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 672px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-MediumItalic", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-style: italic;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .il-cuore-del {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1145px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 169px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1142px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-2 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1489px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 169px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1079px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .per-far-fronte-al {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1604px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 174px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1108px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-3 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1941px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 177px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 766px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .la-conseguenza {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2056px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 176px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1109px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .sgonfiare-questa {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2964px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 455px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 550px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-LightOblique", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 300;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .line {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 873px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 178px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1084px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 1px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .img {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2498px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 178px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1084px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 1px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .footer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 3212px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -45px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1550px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 142px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle-2 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: -23px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -81px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1697px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 286px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-4 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 71px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 335px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-5 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 46px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 1312px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 335px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-6 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2657px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 240px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 960px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 48px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1440px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 117px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>box-shadow: 0px 4px 4px 11px #00000040;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle-3 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: -42px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -143px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1697px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 286px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-7 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 66px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 1111px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 460px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-8 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 13px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 48px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1315px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">/* Original CSS should be injected here */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>min-width: 1440px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>min-height: 3320px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: relative;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2851px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -179px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1859px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 503px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1030px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 170px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 973px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .div {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 455px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 193px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1103px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .viaggio-nella-bolla {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 545px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 365px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 672px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-MediumItalic", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-style: italic;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .il-cuore-del {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1145px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 169px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1142px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-2 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1489px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 169px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1079px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .per-far-fronte-al {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1604px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 174px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1108px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-3 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 1941px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 177px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 766px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .la-conseguenza {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2056px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 176px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1109px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-Regular", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .sgonfiare-questa {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2964px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 455px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 550px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Helvetica-LightOblique", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 300;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .line {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 873px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 178px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1084px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 1px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .img {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2498px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 178px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1084px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 1px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .footer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 3212px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -45px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1550px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 142px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle-2 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: -23px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -81px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1697px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 286px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-4 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 71px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 335px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-5 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 46px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 1312px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 335px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-6 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 2657px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 240px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 960px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 48px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1440px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 117px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>box-shadow: 0px 4px 4px 11px #00000040;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .rectangle-3 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: -42px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: -143px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1697px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 286px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-7 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 66px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 1111px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 460px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.prova .text-wrapper-8 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>top: 13px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>left: 48px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 1315px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: "Futura-Bold", Helvetica;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #d85050;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 64px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: normal;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+</body>
+</html>
