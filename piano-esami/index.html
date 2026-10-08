@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Piano esami">
+<style>:root{padding-top:env(safe-area-inset-top,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>Piano esami DAPL06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: app a una colonna per telefono. In alto il riepilogo delle sessioni,
+   sotto tre viste (Materie / Sessioni / Lezioni) con barra fissa in basso. Solo tema scuro, nero pieno. */
+:root{
+  --bg:#000;
+  --surface:#0b0b0d;
+  --raise:#141417;
+  --line:#25252b;
+  --fg:#f3f3f1;
+  --muted:#8c8c95;
+  --faint:#56565e;
+  --accent:#5b6cff;
+  --accent-soft:rgba(91,108,255,.16);
+  --on-accent:#ffffff;
+  --warn:#ffb238;
+  --warn-soft:rgba(255,178,56,.11);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --navbg:rgba(0,0,0,.92);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#fafafa; --surface:#ffffff; --raise:#f0f0f3; --line:#e1e1e6; --fg:#0b0b0d; --muted:#686872; --faint:#a2a2ab;
+    --accent:#3346e6; --accent-soft:rgba(51,70,230,.10); --warn:#a76200; --warn-soft:rgba(214,138,0,.12); --navbg:rgba(250,250,250,.92);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#fafafa; --surface:#ffffff; --raise:#f0f0f3; --line:#e1e1e6; --fg:#0b0b0d; --muted:#686872; --faint:#a2a2ab;
+  --accent:#3346e6; --accent-soft:rgba(51,70,230,.10); --warn:#a76200; --warn-soft:rgba(214,138,0,.12); --navbg:rgba(250,250,250,.92);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#000; --surface:#0b0b0d; --raise:#141417; --line:#25252b; --fg:#f3f3f1; --muted:#8c8c95; --faint:#56565e;
+  --accent:#5b6cff; --accent-soft:rgba(91,108,255,.16); --warn:#ffb238; --warn-soft:rgba(255,178,56,.11); --navbg:rgba(0,0,0,.92);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:0;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding-block:24px calc(96px + env(safe-area-inset-bottom,0px))}
+
+/* Testata */
+.top h1{font-family:var(--display);font-style:italic;font-weight:900;font-stretch:112%;font-size:clamp(38px,11vw,60px);line-height:.92;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.top .who{margin:10px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.stats{display:flex;gap:28px;margin:22px 0 0;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* Striscia sessioni */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:22px 0 0}
+.strip button{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:left;min-width:0}
+.strip button:hover{border-color:var(--faint)}
+.strip .m{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block}
+.strip .n{font-family:var(--display);font-style:italic;font-weight:800;font-size:24px;line-height:1.1;display:block;font-variant-numeric:tabular-nums}
+.strip .c{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.strip button.next{border-color:var(--accent)}
+.strip button.next .m{color:var(--accent)}
+
+.banner{margin:18px 0 0;padding:12px 14px;border:1px dashed var(--faint);border-radius:10px;font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:center;justify-content:space-between}
+.banner button{background:none;border:0;color:var(--fg);font-weight:600;padding:6px 0;white-space:nowrap}
+
+/* Sezioni */
+.view{margin-top:34px}
+.sec{margin:0 0 34px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px}
+.sec-h h2{font-family:var(--display);font-style:italic;font-weight:900;font-size:26px;line-height:1;margin:0;letter-spacing:-.01em}
+.sec-h .meta{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.list{display:flex;flex-direction:column;gap:10px}
+
+/* Card materia */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card-h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card-h h3{margin:0;font-size:17px;font-weight:700;line-height:1.25;text-wrap:balance;min-width:0}
+.cfa{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:2px}
+.prof{margin:-8px 0 0;font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:13px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
+.facts dd strong{font-weight:700}
+.alert{font-size:12.5px;line-height:1.45;padding:9px 11px;border-radius:8px;background:var(--warn-soft);color:var(--warn)}
+.alert.soft{background:transparent;padding:0;color:var(--muted)}
+.alert.soft b{color:var(--fg);font-weight:600}
+
+.pick-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg button{background:var(--raise);border:1px solid var(--line);border-radius:8px;min-height:42px;padding:6px 4px;font-size:13px;font-weight:600;line-height:1.15}
+.seg button small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;color:var(--muted)}
+.seg button:hover:not(:disabled){border-color:var(--faint)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+.seg button:disabled{opacity:.32;cursor:not-allowed}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;color:var(--muted)}
+.chip:hover{color:var(--fg);border-color:var(--faint)}
+.chip.on{color:var(--fg);border-color:var(--faint)}
+details{font-size:12.5px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--muted);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"– "}
+details ul{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:11.5px}
+
+/* Superati */
+.done{display:flex;flex-direction:column;border-top:1px solid var(--line);margin-top:6px}
+.done-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.done-row span{min-width:0}
+.done-row s{text-decoration:none}
+.done-row .ok{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap}
+.done-row button{background:none;border:0;font-family:var(--mono);font-size:11px;color:var(--faint);padding:4px 0;white-space:nowrap}
+.done-row button:hover{color:var(--fg)}
+
+/* Vista sessioni */
+.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.srow:first-child{border-top:1px solid var(--line)}
+.srow .t{min-width:0}
+.srow .t strong{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.srow .t span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.x{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--muted);white-space:nowrap}
+.x:hover{color:var(--fg);border-color:var(--faint)}
+.empty{padding:14px 0;color:var(--faint);font-size:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.add{margin-top:10px;display:flex;gap:8px}
+.add select{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:14px}
+.sess-note{font-size:12.5px;color:var(--muted);margin:-6px 0 12px}
+
+/* Vista lezioni */
+.dates{display:flex;flex-direction:column;gap:0;margin:0 0 6px}
+.drow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.drow:first-child{border-top:1px solid var(--line)}
+.drow time{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
+.drow.key time{color:var(--accent)}
+.week{border-bottom:1px solid var(--line);padding:12px 0}
+.week-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.week-h strong{font-family:var(--display);font-style:italic;font-weight:800;font-size:17px}
+.week-h span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.week.now{border-left:2px solid var(--accent);padding-left:12px;margin-left:-14px}
+.week.now .week-h span{color:var(--accent)}
+.les{display:grid;grid-template-columns:78px 1fr;gap:10px;font-size:13px;padding:3px 0}
+.les .d{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:2px}
+.les.clash .n{color:var(--warn)}
+.les .n small{display:block;color:var(--muted);font-size:11.5px}
+.noles{font-size:12.5px;color:var(--faint)}
+.break{padding:12px 0;font-size:12.5px;color:var(--muted);border-bottom:1px solid var(--line);font-style:italic}
+.legend{font-size:12.5px;color:var(--muted);margin:-4px 0 14px}
+
+/* Barra in basso */
+.theme{position:absolute;top:0;right:0;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+.theme:hover{color:var(--fg);border-color:var(--faint)}
+.top{position:relative}
+.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.78)}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--navbg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom,0px))}
+.nav-in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.nav button{background:none;border:0;border-radius:8px;padding:10px 4px;font-family:var(--display);font-style:italic;font-weight:800;font-size:16px;color:var(--faint)}
+.nav button[aria-current="page"]{color:var(--fg);background:var(--raise)}
+
+.foot{font-size:12px;color:var(--faint);line-height:1.6;margin-top:10px}
+.foot button{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:var(--muted);margin-top:10px}
+.foot button.arm{border-color:var(--warn);color:var(--warn)}
+
+@media (prefers-reduced-motion:no-preference){
+  .seg button,.chip,.strip button{transition:background-color .15s,border-color .15s,color .15s}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button type="button" class="theme" id="theme" aria-label="Cambia tema">Tema: auto</button>
+    <h1>Piano<br>esami</h1>
+    <p class="who">Mattia Tringale · matr. 19136 · DAPL06 · 3° anno</p>
+    <div class="stats" id="stats"></div>
+    <div class="strip" id="strip"></div>
+    <div class="banner" id="banner" hidden>
+      <span>Le sessioni sono già riempite con una proposta. Cambiale come vuoi: tocca una sessione su ogni materia.</span>
+      <button type="button" id="banner-ok">Ok</button>
+    </div>
+  </header>
+  <main id="view" class="view"></main>
+</div>
+
+<nav class="nav" aria-label="Viste">
+  <div class="nav-in">
+    <button type="button" data-v="materie">Materie</button>
+    <button type="button" data-v="sessioni">Sessioni</button>
+    <button type="button" data-v="lezioni">Lezioni</button>
+  </div>
+</nav>
+
+<script>
+/* ---------- Dati dal palinsesto 1° semestre 2026/27 (versione 06/10/2026) ---------- */
+const WEEKS = { // lunedì di ogni settimana di lezione + etichetta del palinsesto
+  1:['2026-09-28','28.09 – 03.10'], 2:['2026-10-05','05.10 – 10.10'], 3:['2026-10-12','12.10 – 17.10'],
+  4:['2026-10-19','19.10 – 24.10'], 5:['2026-10-26','26.10 – 31.10'], 6:['2026-11-02','02.11 – 07.11'],
+  7:['2026-11-09','09.11 – 14.11'], 8:['2026-11-16','16.11 – 21.11'], 9:['2026-11-23','23.11 – 28.11'],
+  10:['2026-11-30','30.11 – 04.12'], 11:['2027-01-04','07.01 – 09.01'], 12:['2027-01-11','11.01 – 16.01'],
+  13:['2027-01-18','18.01 – 23.01'], 14:['2027-01-25','25.01 – 30.01'], 15:['2027-02-01','01.02 – 03.02']
+};
+const DAYS = { LMM:{first:0,last:2,label:'Lun Mar Mer',short:'L M M'}, GV:{first:3,last:4,label:'Gio Ven',short:'G V'} };
+
+const COURSES = [
+  {id:'962',y:1,name:'Comunicazione pubblicitaria 1',done:true},
+  {id:'927',y:1,name:'Fondamenti di informatica',done:true},
+  {id:'502',y:1,name:'Graphic design 1',done:true},
+  {id:'961',y:1,name:'Informatica per la grafica',done:true},
+  {id:'748',y:1,name:'Metodologia progettuale della comunicazione visiva',done:true},
+  {id:'964',y:1,name:'Sociologia dei processi culturali',done:true},
+  {id:'138',y:1,name:"Storia dell'arte contemporanea 1",done:true},
+  {id:'963',y:1,name:"Tecniche dell'incisione calcografica",cfa:8,prof:'Daniela Maria Costa',
+    slots:[{w:[2,3],d:'LMM',t:'08:45-13:15',p:'Barletta, aula 1'},{w:[6,7,9,11,13,14],d:'GV',t:'08:45-13:15',p:'Barletta, aula 2'}]},
+
+  {id:'415',y:2,name:'Computer graphic',done:true},
+  {id:'966',y:2,name:'Comunicazione pubblicitaria 2',done:true},
+  {id:'498',y:2,name:'Design',done:true},
+  {id:'503',y:2,name:'Graphic design 2',cfa:10,prof:'Giuseppe Maurizio Astuti',
+    slots:[{w:[1,2,3,4,5,6,7],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 9'}]},
+  {id:'139',y:2,name:"Storia dell'arte contemporanea 2",done:true},
+  {id:'965',y:2,name:'Storia della stampa e della editoria',done:true},
+  {id:'824',y:2,name:'Web design',cfa:10,prof:'Ciro Esposito',
+    slots:[{w:[8,9,10,12,13,14,15],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 9'}]},
+
+  {id:'956',y:3,name:'Elementi di grafica editoriale',cfa:10,prof:'Marco Lo Curzio',
+    slots:[{w:[8,9],d:'LMM',t:'08:45-13:15',p:'Franchetti, Aula Magna'},{w:[10,12,13,14,15],d:'LMM',t:'08:45-13:15',p:'Franchetti, aula 9'}]},
+  {id:'746',y:3,name:'Fotografia digitale',sem2:true},
+  {id:'504',y:3,name:'Graphic design 3',sem2:true},
+  {id:'1136',y:3,name:'Inglese (modulo C)',cfa:4,prof:'Giuliana Arcidiacono',
+    slots:[{w:[1,2],d:'GV',t:'08:45-12:30',p:'Franchetti, aula 9'},{w:[6],d:'LMM',t:'08:45-13:15',p:'Franchetti, Aula Magna'}]},
+  {id:'968',y:3,name:"Storia dell'illustrazione e della pubblicità",cfa:6,prof:'Vincenzo Tromba',
+    slots:[{w:[1,2,3,4,5],d:'LMM',t:'11:00-13:15',p:'Franchetti, aula 10'}]},
+  {id:'199',y:3,name:'Teoria e metodo dei mass media',sem2:true},
+  {id:'355',y:3,name:'Elaborato di sintesi finale (tesi)',cfa:8,thesis:true},
+
+  {id:'LAY',y:'S',name:'Layout e tecniche di visualizzazione',cfa:8,prof:'Giorgio Morara',from:'dal corso di Fotografia, 2° anno',
+    slots:[{w:[7,8,9],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 13'},{w:[10,12,13],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 5'}]},
+  {id:'ECO',y:'S',name:'Ecodesign',cfa:6,prof:'Giovanni Pedone',from:'dal corso di Fashion design, 2° anno',
+    slots:[{w:[9,10,11,12,13,14],d:'GV',t:'08:45-13:15',p:'Franchetti, aula 11'}]}
+];
+
+const SESS = [ // sessioni d'esame dal Manifesto degli studi 2026/27
+  {k:'dic',label:'Dicembre',short:'Dic',year:'2026',start:'2026-12-01'},
+  {k:'feb',label:'Febbraio',short:'Feb',year:'2027',start:'2027-02-04'},
+  {k:'giu',label:'Giugno',short:'Giu',year:'2027',start:'2027-06-01'},
+  {k:'set',label:'Settembre',short:'Set',year:'2027',start:'2027-09-01'}
+];
+const DSESS = [ // sessioni di diploma
+  {k:'d-giu',label:'Giugno',short:'Giu',year:'2027'},{k:'d-set',label:'Settembre',short:'Set',year:'2027'},
+  {k:'d-dic',label:'Dicembre',short:'Dic',year:'2027'},{k:'d-feb',label:'Febbraio',short:'Feb',year:'2028'}
+];
+const YEARS = [{k:1,label:'1° anno'},{k:2,label:'2° anno'},{k:3,label:'3° anno'},{k:'S',label:'A scelta'}];
+
+/* ---------- Date ---------- */
+const MON = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const toDate = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y,m-1,d); };
+const addDays = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; };
+const fmt = (dt,yr) => dt.getDate()+' '+MON[dt.getMonth()]+(yr?' '+dt.getFullYear():'');
+const mins = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+const range = t => t.split('-').map(mins);
+const pretty = t => t.replace('-',' – ');
+
+function span(c){
+  if(!c.slots) return null;
+  let first=null,last=null;
+  c.slots.forEach(s=>{
+    const f = addDays(toDate(WEEKS[Math.min(...s.w)][0]), DAYS[s.d].first);
+    const l = addDays(toDate(WEEKS[Math.max(...s.w)][0]), DAYS[s.d].last);
+    if(!first||f<first) first=f;
+    if(!last||l>last) last=l;
+  });
+  return {first,last};
+}
+function weeksText(arr){
+  const a=[...arr].sort((x,y)=>x-y), out=[]; let s=a[0], p=a[0];
+  for(let i=1;i<=a.length;i++){
+    if(a[i]===p+1){p=a[i];continue;}
+    out.push(s===p?String(s):s+'–'+p); s=a[i]; p=a[i];
+  }
+  return out.join(', ');
+}
+function clashWeeks(a,b){
+  const hit=new Set();
+  (a.slots||[]).forEach(sa=>(b.slots||[]).forEach(sb=>{
+    if(sa.d!==sb.d) return;
+    const [a1,a2]=range(sa.t),[b1,b2]=range(sb.t);
+    if(a1<b2&&b1<a2) sa.w.forEach(w=>{ if(sb.w.includes(w)) hit.add(w); });
+  }));
+  return [...hit].sort((x,y)=>x-y);
+}
+
+/* ---------- Stato (salvato su questo telefono) ---------- */
+const KEY='pianoEsami.mattia.v2';
+const byId = id => COURSES.find(c=>c.id===id);
+function defaults(){
+  const attend={};
+  COURSES.forEach(c=>{ if(!c.done&&!c.thesis) attend[c.id] = (c.y===3||c.y==='S'); });
+  return {
+    plan:{'968':'dic','1136':'dic','503':'dic','LAY':'feb','ECO':'feb','956':'feb','824':'feb','746':'giu','504':'giu','199':'giu','355':'d-giu'},
+    passed:{}, attend, view:'materie', bannerSeen:false
+  };
+}
+let state;
+try{ state = JSON.parse(localStorage.getItem(KEY)) || defaults(); }catch(e){ state = defaults(); }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+const isDone = c => c.done || !!state.passed[c.id];
+const pending = () => COURSES.filter(c=>!isDone(c));
+const exams = () => pending().filter(c=>!c.thesis);
+const attends = c => !!state.attend[c.id];
+
+function earliest(c){ return SESS.find(s=>eligible(c,s)); }
+function eligible(c,s){
+  if(isDone(c)||c.thesis) return false;
+  if(!attends(c)) return true;                       // frequenza già fatta: qualsiasi sessione
+  if(c.sem2) return s.k==='giu'||s.k==='set';        // lezioni nel 2° semestre
+  return span(c).last < toDate(s.start);
+}
+function nextSession(){ const t=new Date(); return SESS.find(s=>toDate(s.start)>=addDays(t,-20)) || SESS[SESS.length-1]; }
+
+/* ---------- Helpers DOM ---------- */
+function h(tag, attrs, ...kids){
+  const el=document.createElement(tag);
+  if(attrs) for(const [k,v] of Object.entries(attrs)){
+    if(v==null||v===false) continue;
+    if(k==='class') el.className=v;
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2),v);
+    else if(k==='html') el.innerHTML=v;
+    else el.setAttribute(k, v===true?'':v);
+  }
+  kids.flat().forEach(k=>{ if(k==null||k===false) return; el.append(k.nodeType?k:document.createTextNode(k)); });
+  return el;
+}
+function setPlan(id,k){ if(state.plan[id]===k) delete state.plan[id]; else state.plan[id]=k; save(); render(); }
+
+/* ---------- Testata ---------- */
+function renderTop(){
+  const ex=exams(), planned=ex.filter(c=>SESS.some(s=>s.k===state.plan[c.id]));
+  const cfa=ex.reduce((a,c)=>a+(c.cfa||0),0);
+  const unknown=ex.filter(c=>!c.cfa).length;
+  document.getElementById('stats').replaceChildren(
+    h('div',{class:'stat'},h('b',null,String(ex.length)),h('span',null,'esami da dare')),
+    h('div',{class:'stat'},h('b',null,planned.length+'/'+ex.length),h('span',null,'programmati')),
+    h('div',{class:'stat'},h('b',null,cfa+(unknown?'+':'')),h('span',null,unknown?'CFA noti da dare':'CFA da dare'))
+  );
+  const nx=nextSession();
+  document.getElementById('strip').replaceChildren(...SESS.map(s=>{
+    const list=ex.filter(c=>state.plan[c.id]===s.k);
+    const cf=list.reduce((a,c)=>a+(c.cfa||0),0);
+    return h('button',{type:'button',class:s.k===nx.k?'next':null,onclick:()=>go('sessioni','s-'+s.k),'aria-label':s.label+' '+s.year+': '+list.length+' esami'},
+      h('span',{class:'m'},s.short+' '+s.year.slice(2)),
+      h('span',{class:'n'},String(list.length)),
+      h('span',{class:'c'},cf+' CFA'+(list.some(c=>!c.cfa)?'+':'')));
+  }));
+  document.getElementById('banner').hidden=!!state.bannerSeen;
+}
+
+/* ---------- Vista Materie ---------- */
+function courseCard(c){
+  const sp=span(c), att=attends(c), ear=earliest(c);
+  const card=h('article',{class:'card',id:'c-'+c.id});
+  card.append(h('div',null,
+    c.y==='S'?h('span',{class:'tag'},'A scelta · '+c.from):null,
+    h('div',{class:'card-h'},h('h3',null,c.name),h('span',{class:'cfa'},c.cfa?c.cfa+' CFA':'CFA —'))));
+  if(c.prof) card.append(h('p',{class:'prof'},'Prof. '+c.prof));
+
+  const facts=h('dl',{class:'facts'});
+  if(c.thesis){
+    facts.append(h('dt',null,'Sessioni'),h('dd',null,'Diploma: giu 27, set 27, dic 27, feb 28'));
+  }else if(c.sem2){
+    facts.append(h('dt',null,'Lezioni'),h('dd',null,'2° semestre, palinsesto non ancora uscito'));
+    facts.append(h('dt',null,'Esame'),h('dd',null,h('strong',null,att?'da giugno 2027':'da dicembre 2026')));
+  }else{
+    const days=[...new Set(c.slots.map(s=>DAYS[s.d].label))].join(' / ');
+    const times=[...new Set(c.slots.map(s=>pretty(s.t)))].join(' / ');
+    if(att){
+      facts.append(h('dt',null,'Inizio'),h('dd',null,h('strong',null,fmt(sp.first,true))));
+      facts.append(h('dt',null,'Fine'),h('dd',null,h('strong',null,fmt(sp.last,true))));
+    }else{
+      facts.append(h('dt',null,'Lezioni'),h('dd',null,fmt(sp.first)+' → '+fmt(sp.last,true)+' (già frequentata)'));
+    }
+    facts.append(h('dt',null,'Quando'),h('dd',null,days+', '+times));
+    facts.append(h('dt',null,'Esame'),h('dd',null,h('strong',null,ear?'da '+ear.label.toLowerCase()+' '+ear.year:'—')));
+  }
+  card.append(facts);
+
+  // sovrapposizioni con altre materie da dare
+  if(c.slots){
+    COURSES.forEach(o=>{
+      if(o===c||isDone(o)||!o.slots) return;
+      const w=clashWeeks(c,o); if(!w.length) return;
+      if(att&&attends(o)) card.append(h('div',{class:'alert'},'Stesso orario di '+o.name+' (settimane '+weeksText(w)+').'));
+      else if(att) card.append(h('p',{class:'alert soft'},'Stesso orario di ',h('b',null,o.name),' nelle settimane '+weeksText(w)+', se dovessi frequentarla.'));
+    });
+  }
+
+  // scelta sessione
+  const opts=c.thesis?DSESS:SESS;
+  const seg=h('div',{class:'seg',role:'group','aria-label':'Sessione'});
+  opts.forEach(s=>{
+    const ok=c.thesis||eligible(c,s);
+    seg.append(h('button',{type:'button','aria-pressed':String(state.plan[c.id]===s.k),disabled:!ok,
+      title:ok?s.label+' '+s.year:'Le lezioni non sono ancora finite',onclick:()=>setPlan(c.id,s.k)},
+      s.short,h('small',null,s.year)));
+  });
+  card.append(h('div',null,h('p',{class:'pick-l'},c.thesis?'Sessione di diploma':'Sessione d’esame'),seg));
+
+  const acts=h('div',{class:'actions'});
+  if(!c.thesis){
+    acts.append(h('button',{type:'button',class:'chip'+(att?' on':''),'aria-pressed':String(att),onclick:()=>{
+      state.attend[c.id]=!att;
+      if(state.plan[c.id]&&!eligible(c,SESS.find(s=>s.k===state.plan[c.id]))) delete state.plan[c.id];
+      save(); render();
+    }},att?'Frequento quest’anno':'Frequenza già fatta'));
+  }
+  acts.append(h('button',{type:'button',class:'chip',onclick:()=>{state.passed[c.id]=true; delete state.plan[c.id]; save(); render();}},'Segna superato'));
+  card.append(acts);
+
+  if(c.slots){
+    card.append(h('details',null,h('summary',null,'Orario completo'),
+      h('ul',null,c.slots.map(s=>h('li',null,'Sett. '+weeksText(s.w)+' · '+DAYS[s.d].label+' '+pretty(s.t)+' · '+s.p)))));
+  }
+  return card;
+}
+function renderMaterie(){
+  const out=[];
+  YEARS.forEach(y=>{
+    const all=COURSES.filter(c=>c.y===y.k);
+    const todo=all.filter(c=>!isDone(c)), done=all.filter(isDone);
+    const sec=h('section',{class:'sec',id:'y-'+y.k},
+      h('div',{class:'sec-h'},h('h2',null,y.label),h('span',{class:'meta'},y.k==='S'?'14 CFA · ne servono 10':done.length+'/'+all.length+' superati')));
+    const list=h('div',{class:'list'}); todo.forEach(c=>list.append(courseCard(c)));
+    if(todo.length) sec.append(list);
+    if(done.length){
+      sec.append(h('div',{class:'done'},done.map(c=>h('div',{class:'done-row'},
+        h('span',null,c.name),
+        c.done?h('span',{class:'ok'},'superato'):h('button',{type:'button',onclick:()=>{delete state.passed[c.id]; save(); render();}},'superato · annulla')))));
+    }
+    out.push(sec);
+  });
+  return out;
+}
+
+/* ---------- Vista Sessioni ---------- */
+function renderSessioni(){
+  const ex=exams(), out=[];
+  SESS.forEach(s=>{
+    const list=ex.filter(c=>state.plan[c.id]===s.k);
+    const cf=list.reduce((a,c)=>a+(c.cfa||0),0);
+    const sec=h('section',{class:'sec',id:'s-'+s.k},
+      h('div',{class:'sec-h'},h('h2',null,s.label+' '+s.year),h('span',{class:'meta'},list.length+' esami · '+cf+' CFA'+(list.some(c=>!c.cfa)?'+':''))));
+    if(s.k==='feb') sec.append(h('p',{class:'sess-note'},'Non c’è una sessione a gennaio: dopo dicembre la prossima è febbraio.'));
+    if(list.length){
+      sec.append(h('div',null,list.map(c=>h('div',{class:'srow'},
+        h('div',{class:'t'},h('strong',null,c.name),h('span',null,(c.cfa?c.cfa+' CFA':'CFA —')+(c.prof?' · '+c.prof:''))),
+        h('button',{type:'button',class:'x',onclick:()=>setPlan(c.id,s.k),'aria-label':'Togli '+c.name},'Togli')))));
+    }else sec.append(h('div',{class:'empty'},'Nessun esame in questa sessione.'));
+    const avail=ex.filter(c=>state.plan[c.id]!==s.k&&eligible(c,s));
+    if(avail.length){
+      const sel=h('select',{id:'add-'+s.k,'aria-label':'Aggiungi esame a '+s.label},
+        h('option',{value:''},'+ Aggiungi esame'),
+        avail.map(c=>h('option',{value:c.id},c.name+(state.plan[c.id]?' (ora in '+SESS.find(x=>x.k===state.plan[c.id]).short+')':''))));
+      sel.addEventListener('change',()=>{ if(sel.value){ state.plan[sel.value]=s.k; save(); render(); } });
+      sec.append(h('div',{class:'add'},sel));
+    }
+    out.push(sec);
+  });
+  const free=ex.filter(c=>!SESS.some(s=>s.k===state.plan[c.id]));
+  const fsec=h('section',{class:'sec',id:'s-none'},h('div',{class:'sec-h'},h('h2',null,'Da programmare'),h('span',{class:'meta'},free.length+' esami')));
+  if(free.length){
+    fsec.append(h('div',null,free.map(c=>{
+      const ear=earliest(c);
+      return h('div',{class:'srow'},
+        h('div',{class:'t'},h('strong',null,c.name),h('span',null,ear?'Primo appello utile: '+ear.label.toLowerCase()+' '+ear.year:'')),
+        ear?h('button',{type:'button',class:'x',onclick:()=>setPlan(c.id,ear.k)},'Metti a '+ear.short):null);
+    })));
+  }else fsec.append(h('div',{class:'empty'},'Tutti gli esami hanno una sessione.'));
+  out.push(fsec);
+
+  const th=COURSES.find(c=>c.thesis);
+  if(!isDone(th)){
+    const d=DSESS.find(x=>x.k===state.plan[th.id]);
+    out.push(h('section',{class:'sec'},h('div',{class:'sec-h'},h('h2',null,'Diploma'),h('span',{class:'meta'},'8 CFA')),
+      h('div',{class:'srow'},h('div',{class:'t'},h('strong',null,'Elaborato di sintesi finale'),h('span',null,d?'Sessione di '+d.label.toLowerCase()+' '+d.year:'Sessione non scelta')),
+        h('button',{type:'button',class:'x',onclick:()=>go('materie','c-355')},'Cambia'))));
+  }
+  out.push(h('div',{class:'foot'},
+    'Sessioni dal Manifesto degli studi 2026/27. Le date dei singoli appelli escono sul sito qualche settimana prima di ogni sessione. Un esame si può dare solo dopo la fine delle lezioni.',
+    h('br'),resetBtn()));
+  return out;
+}
+function resetBtn(){
+  let armed=false,timer;
+  const b=h('button',{type:'button'},'Ripristina la proposta iniziale');
+  b.addEventListener('click',()=>{
+    if(!armed){ armed=true; b.classList.add('arm'); b.textContent='Tocca di nuovo per confermare';
+      timer=setTimeout(()=>{armed=false;b.classList.remove('arm');b.textContent='Ripristina la proposta iniziale';},3500); return; }
+    clearTimeout(timer); const v=state.view; state=defaults(); state.view=v; state.bannerSeen=true; save(); render();
+  });
+  return b;
+}
+
+/* ---------- Vista Lezioni ---------- */
+function renderLezioni(){
+  const out=[];
+  const lay=byId('LAY'),eco=byId('ECO');
+  const sl=span(lay), se=span(eco);
+  const firstElective = sl.first<se.first?sl.first:se.first;
+  out.push(h('section',{class:'sec'},
+    h('div',{class:'sec-h'},h('h2',null,'Scadenze'),h('span',{class:'meta'},'1° semestre')),
+    h('div',{class:'dates'},
+      h('div',{class:'drow key'},h('time',null,fmt(addDays(firstElective,7),true)),h('div',null,'Ultimo giorno per inviare il modulo delle discipline a scelta (7 giorni dall’inizio di Layout). Da mandare dalla mail istituzionale a segreteria@abacatania.it.')),
+      h('div',{class:'drow'},h('time',null,fmt(sl.first,true)),h('div',null,'Prima lezione di Layout e tecniche di visualizzazione')),
+      h('div',{class:'drow'},h('time',null,fmt(se.first,true)),h('div',null,'Prima lezione di Ecodesign')),
+      h('div',{class:'drow'},h('time',null,'dic 2026'),h('div',null,'Sessione d’esame invernale')),
+      h('div',{class:'drow'},h('time',null,'3 feb 2027'),h('div',null,'Fine delle lezioni del 1° semestre')),
+      h('div',{class:'drow'},h('time',null,'feb 2027'),h('div',null,'Sessione d’esame primaverile'))
+    )));
+
+  const att=COURSES.filter(c=>!isDone(c)&&c.slots&&attends(c));
+  const sec=h('section',{class:'sec'},h('div',{class:'sec-h'},h('h2',null,'Settimana per settimana'),h('span',{class:'meta'},att.length+' corsi')));
+  sec.append(h('p',{class:'legend'},'Solo le materie che frequenti quest’anno. Puoi cambiarle dalla vista Materie.'));
+  const today=new Date();
+  Object.keys(WEEKS).map(Number).forEach(w=>{
+    if(w===11) sec.append(h('div',{class:'break'},'Pausa natalizia: 5 dicembre – 6 gennaio'));
+    const mon=toDate(WEEKS[w][0]);
+    const now=today>=mon&&today<addDays(mon,7);
+    const rows=[];
+    att.forEach(c=>c.slots.forEach(s=>{ if(s.w.includes(w)) rows.push({c,s}); }));
+    rows.sort((a,b)=>DAYS[a.s.d].first-DAYS[b.s.d].first||mins(a.s.t.split('-')[0])-mins(b.s.t.split('-')[0]));
+    const clashIds=new Set();
+    rows.forEach(a=>rows.forEach(b=>{ if(a!==b&&a.c!==b.c&&clashWeeks({slots:[a.s]},{slots:[b.s]}).includes(w)){clashIds.add(a.c.id);clashIds.add(b.c.id);} }));
+    const wk=h('div',{class:'week'+(now?' now':'')},
+      h('div',{class:'week-h'},h('strong',null,'Sett. '+w),h('span',null,(now?'questa settimana · ':'')+WEEKS[w][1])));
+    if(rows.length) rows.forEach(({c,s})=>wk.append(h('div',{class:'les'+(clashIds.has(c.id)?' clash':'')},
+      h('span',{class:'d'},DAYS[s.d].short+'\n'),
+      h('span',{class:'n'},c.name+(clashIds.has(c.id)?' · sovrapposizione':''),h('small',null,pretty(s.t)+' · '+s.p)))));
+    else wk.append(h('div',{class:'noles'},'Nessuna lezione'));
+    sec.append(wk);
+  });
+  out.push(sec);
+  out.push(h('p',{class:'foot'},'Dati dal palinsesto del 1° semestre 2026/27, versione del 6 ottobre 2026. Il palinsesto del 2° semestre (Fotografia digitale, Graphic design 3, Teoria e metodo dei mass media) non è ancora uscito.'));
+  return out;
+}
+
+/* ---------- Navigazione ---------- */
+function go(v,anchor){
+  state.view=v; save(); render();
+  requestAnimationFrame(()=>{
+    const el=anchor&&document.getElementById(anchor);
+    if(el) el.scrollIntoView({block:'start',behavior:'smooth'});
+    else document.getElementById('view').scrollIntoView({block:'start'});
+  });
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.v)));
+document.getElementById('banner-ok').addEventListener('click',()=>{state.bannerSeen=true;save();render();});
+
+const THEMES=['auto','chiaro','scuro'];
+function applyTheme(){
+  const t=state.theme||'auto';
+  if(t==='chiaro') document.documentElement.setAttribute('data-theme','light');
+  else if(t==='scuro') document.documentElement.setAttribute('data-theme','dark');
+  else if(state.themeTouched) document.documentElement.removeAttribute('data-theme');
+  document.getElementById('theme').textContent='Tema: '+t;
+}
+document.getElementById('theme').addEventListener('click',()=>{
+  state.theme=THEMES[(THEMES.indexOf(state.theme||'auto')+1)%3]; state.themeTouched=true; save(); applyTheme();
+});
+applyTheme();
+
+function render(){
+  renderTop();
+  const v=state.view||'materie';
+  document.querySelectorAll('.nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.v===v?'page':'false'));
+  const view=document.getElementById('view');
+  view.replaceChildren(...(v==='sessioni'?renderSessioni():v==='lezioni'?renderLezioni():renderMaterie()));
+}
+render();
+</script>
+
+</body>
+</html>
