@@ -3,222 +3,425 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#f4f5f7">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Piano esami">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dashboard">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>:root{padding-top:env(safe-area-inset-top,0px)}body{margin:0}[hidden]{display:none!important}</style>
-<title>Piano esami DAPL06</title>
+<title>Master Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: app a una colonna per telefono. In alto il riepilogo delle sessioni,
-   sotto tre viste (Materie / Sessioni / Lezioni) con barra fissa in basso. Solo tema scuro, nero pieno. */
+/* Layout: app a pannelli. Su iPad e Mac barra laterale fissa + area contenuti a griglia di schede;
+   su telefono barra in alto e schede in basso. Solo tema chiaro: carta fredda, inchiostro scuro,
+   un colore per ogni area della vita (studio indaco, Giappone vermiglio, Copenaghen blu mare). */
 :root{
-  --bg:#000;
-  --surface:#0b0b0d;
-  --raise:#141417;
-  --line:#25252b;
-  --fg:#f3f3f1;
-  --muted:#8c8c95;
-  --faint:#56565e;
-  --accent:#5b6cff;
-  --accent-soft:rgba(91,108,255,.16);
-  --on-accent:#ffffff;
-  --warn:#ffb238;
-  --warn-soft:rgba(255,178,56,.11);
-  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
-  --navbg:rgba(0,0,0,.92);
-  color-scheme:dark;
-}
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:#fafafa; --surface:#ffffff; --raise:#f0f0f3; --line:#e1e1e6; --fg:#0b0b0d; --muted:#686872; --faint:#a2a2ab;
-    --accent:#3346e6; --accent-soft:rgba(51,70,230,.10); --warn:#a76200; --warn-soft:rgba(214,138,0,.12); --navbg:rgba(250,250,250,.92);
-    color-scheme:light;
-  }
-}
-:root[data-theme="light"]{
-  --bg:#fafafa; --surface:#ffffff; --raise:#f0f0f3; --line:#e1e1e6; --fg:#0b0b0d; --muted:#686872; --faint:#a2a2ab;
-  --accent:#3346e6; --accent-soft:rgba(51,70,230,.10); --warn:#a76200; --warn-soft:rgba(214,138,0,.12); --navbg:rgba(250,250,250,.92);
+  --paper:#f4f5f7;
+  --card:#ffffff;
+  --side:#fbfbfc;
+  --ink:#171a20;
+  --ink2:#454b57;
+  --mut:#7a808c;
+  --line:#e2e5ea;
+  --line2:#eff1f4;
+  --study:#3a49c4; --study-soft:#eceefc;
+  --jp:#c4432c;    --jp-soft:#fcece8;
+  --cph:#1e6a87;   --cph-soft:#e4f1f6;
+  --ok:#2d7a4f;    --ok-soft:#e5f3eb;
+  --warn:#a86400;  --warn-soft:#fcf1dd;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   color-scheme:light;
 }
-:root[data-theme="dark"]{
-  --bg:#000; --surface:#0b0b0d; --raise:#141417; --line:#25252b; --fg:#f3f3f1; --muted:#8c8c95; --faint:#56565e;
-  --accent:#5b6cff; --accent-soft:rgba(91,108,255,.16); --warn:#ffb238; --warn-soft:rgba(255,178,56,.11); --navbg:rgba(0,0,0,.92);
-  color-scheme:dark;
-}
 *{box-sizing:border-box}
-html,body{background:var(--bg);color:var(--fg)}
-body{font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:0;-webkit-font-smoothing:antialiased}
-button,select{font:inherit;color:inherit}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--sans);font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:0;padding-block:0}
+h1,h2,h3,p{margin:0}
+button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:640px;margin:0 auto;padding-block:24px calc(96px + env(safe-area-inset-bottom,0px))}
+:focus-visible{outline:2px solid var(--study);outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums lining-nums}
 
-/* Testata */
-.top h1{font-family:var(--display);font-style:italic;font-weight:900;font-stretch:112%;font-size:clamp(38px,11vw,60px);line-height:.92;letter-spacing:-.02em;margin:0;text-wrap:balance}
-.top .who{margin:10px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.stats{display:flex;gap:28px;margin:22px 0 0;flex-wrap:wrap}
-.stat b{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-size:12px;color:var(--muted)}
-
-/* Striscia sessioni */
-.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:22px 0 0}
-.strip button{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:left;min-width:0}
-.strip button:hover{border-color:var(--faint)}
-.strip .m{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block}
-.strip .n{font-family:var(--display);font-style:italic;font-weight:800;font-size:24px;line-height:1.1;display:block;font-variant-numeric:tabular-nums}
-.strip .c{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.strip button.next{border-color:var(--accent)}
-.strip button.next .m{color:var(--accent)}
-
-.banner{margin:18px 0 0;padding:12px 14px;border:1px dashed var(--faint);border-radius:10px;font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:center;justify-content:space-between}
-.banner button{background:none;border:0;color:var(--fg);font-weight:600;padding:6px 0;white-space:nowrap}
-
-/* Sezioni */
-.view{margin-top:34px}
-.sec{margin:0 0 34px}
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px}
-.sec-h h2{font-family:var(--display);font-style:italic;font-weight:900;font-size:26px;line-height:1;margin:0;letter-spacing:-.01em}
-.sec-h .meta{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
-.list{display:flex;flex-direction:column;gap:10px}
-
-/* Card materia */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.card-h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.card-h h3{margin:0;font-size:17px;font-weight:700;line-height:1.25;text-wrap:balance;min-width:0}
-.cfa{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:2px}
-.prof{margin:-8px 0 0;font-size:13px;color:var(--muted)}
-.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:13px}
-.facts dt{color:var(--muted)}
-.facts dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
-.facts dd strong{font-weight:700}
-.alert{font-size:12.5px;line-height:1.45;padding:9px 11px;border-radius:8px;background:var(--warn-soft);color:var(--warn)}
-.alert.soft{background:transparent;padding:0;color:var(--muted)}
-.alert.soft b{color:var(--fg);font-weight:600}
-
-.pick-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
-.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.seg button{background:var(--raise);border:1px solid var(--line);border-radius:8px;min-height:42px;padding:6px 4px;font-size:13px;font-weight:600;line-height:1.15}
-.seg button small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;color:var(--muted)}
-.seg button:hover:not(:disabled){border-color:var(--faint)}
-.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
-.seg button:disabled{opacity:.32;cursor:not-allowed}
-
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;color:var(--muted)}
-.chip:hover{color:var(--fg);border-color:var(--faint)}
-.chip.on{color:var(--fg);border-color:var(--faint)}
-details{font-size:12.5px;color:var(--muted)}
-details summary{cursor:pointer;color:var(--muted);list-style:none}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"+ "}
-details[open] summary::before{content:"– "}
-details ul{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:11.5px}
-
-/* Superati */
-.done{display:flex;flex-direction:column;border-top:1px solid var(--line);margin-top:6px}
-.done-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
-.done-row span{min-width:0}
-.done-row s{text-decoration:none}
-.done-row .ok{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap}
-.done-row button{background:none;border:0;font-family:var(--mono);font-size:11px;color:var(--faint);padding:4px 0;white-space:nowrap}
-.done-row button:hover{color:var(--fg)}
-
-/* Vista sessioni */
-.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-.srow:first-child{border-top:1px solid var(--line)}
-.srow .t{min-width:0}
-.srow .t strong{display:block;font-weight:600;font-size:15px;line-height:1.3}
-.srow .t span{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.x{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--muted);white-space:nowrap}
-.x:hover{color:var(--fg);border-color:var(--faint)}
-.empty{padding:14px 0;color:var(--faint);font-size:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.add{margin-top:10px;display:flex;gap:8px}
-.add select{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:14px}
-.sess-note{font-size:12.5px;color:var(--muted);margin:-6px 0 12px}
-
-/* Vista lezioni */
-.dates{display:flex;flex-direction:column;gap:0;margin:0 0 6px}
-.drow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
-.drow:first-child{border-top:1px solid var(--line)}
-.drow time{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
-.drow.key time{color:var(--accent)}
-.week{border-bottom:1px solid var(--line);padding:12px 0}
-.week-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
-.week-h strong{font-family:var(--display);font-style:italic;font-weight:800;font-size:17px}
-.week-h span{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.week.now{border-left:2px solid var(--accent);padding-left:12px;margin-left:-14px}
-.week.now .week-h span{color:var(--accent)}
-.les{display:grid;grid-template-columns:78px 1fr;gap:10px;font-size:13px;padding:3px 0}
-.les .d{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:2px}
-.les.clash .n{color:var(--warn)}
-.les .n small{display:block;color:var(--muted);font-size:11.5px}
-.noles{font-size:12.5px;color:var(--faint)}
-.break{padding:12px 0;font-size:12.5px;color:var(--muted);border-bottom:1px solid var(--line);font-style:italic}
-.legend{font-size:12.5px;color:var(--muted);margin:-4px 0 14px}
-
-/* Barra in basso */
-.theme{position:absolute;top:0;right:0;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
-.theme:hover{color:var(--fg);border-color:var(--faint)}
-.top{position:relative}
-.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.78)}
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--navbg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom,0px))}
-.nav-in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.nav button{background:none;border:0;border-radius:8px;padding:10px 4px;font-family:var(--display);font-style:italic;font-weight:800;font-size:16px;color:var(--faint)}
-.nav button[aria-current="page"]{color:var(--fg);background:var(--raise)}
-
-.foot{font-size:12px;color:var(--faint);line-height:1.6;margin-top:10px}
-.foot button{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:var(--muted);margin-top:10px}
-.foot button.arm{border-color:var(--warn);color:var(--warn)}
-
-@media (prefers-reduced-motion:no-preference){
-  .seg button,.chip,.strip button{transition:background-color .15s,border-color .15s,color .15s}
+/* Struttura */
+.app{display:grid;grid-template-columns:minmax(0,1fr);min-height:100vh}
+.side{display:none}
+.main{padding-inline:16px;padding-block:18px calc(96px + env(safe-area-inset-bottom,0px));min-width:0}
+.inner{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.mtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.mtop b{font-family:var(--serif);font-weight:500;font-size:20px}
+.mtop span{font-size:13px;color:var(--mut)}
+@media (min-width:880px){
+  .app{grid-template-columns:252px minmax(0,1fr)}
+  .side{display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh;padding:30px 18px 24px;background:var(--side);border-right:1px solid var(--line);overflow-y:auto}
+  .main{padding-inline:40px;padding-block:36px 64px}
+  .mtop,.tabs{display:none!important}
 }
+.brand{font-family:var(--serif);font-size:26px;line-height:1.05;font-weight:500;padding-inline:10px}
+.brand small{display:block;font-family:var(--sans);font-size:13px;color:var(--mut);margin-top:8px;line-height:1.4}
+.snav{display:flex;flex-direction:column;gap:2px}
+.snav button{display:flex;align-items:center;gap:12px;background:none;border:0;border-radius:10px;padding:10px 12px;text-align:left;font-size:15px;font-weight:500;color:var(--ink2)}
+.snav button:hover{background:var(--line2)}
+.snav button[aria-current="page"]{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 1px 2px rgba(23,26,32,.05)}
+.snav button span{flex:1}
+.snav button em{font-style:normal;font-size:12px;color:var(--mut);font-variant-numeric:tabular-nums}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--ink2));flex:none}
+.side-foot{margin-top:auto;padding:16px 12px 0;border-top:1px solid var(--line)}
+.side-foot p{font-size:12.5px;color:var(--mut)}
+.side-foot b{display:block;font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;margin-top:2px;color:var(--ink)}
+
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(251,251,252,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+.tabs-in{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;max-width:640px;margin:0 auto}
+.tabs button{background:none;border:0;border-radius:10px;padding:8px 2px 6px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--mut);min-width:0}
+.tabs button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tabs button[aria-current="page"]{color:var(--ink);background:var(--line2)}
+
+/* Intestazione di pagina */
+.ph{display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--mut))}
+.ph h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,50px);line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.ph p{color:var(--ink2);max-width:62ch;font-size:16px}
+
+/* Griglie e schede */
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media (min-width:700px){.g2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:760px){.g3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.span2{grid-column:1/-1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0;box-shadow:0 1px 2px rgba(23,26,32,.04);display:flex;flex-direction:column;gap:14px}
+.card.tint{background:var(--soft);border-color:transparent;box-shadow:none}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card h2{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2;text-wrap:balance}
+.label{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.link{background:none;border:0;padding:0;font-size:13.5px;font-weight:600;color:var(--c,var(--study));white-space:nowrap}
+.link:hover{text-decoration:underline}
+.big{font-family:var(--serif);font-weight:500;font-size:clamp(38px,5vw,48px);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.big small{font-size:.5em;margin-left:4px;color:var(--ink2)}
+.mid{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums lining-nums}
+.sub{font-size:14px;color:var(--ink2)}
+.muted{color:var(--mut)}
+.small{font-size:13.5px}
+.bar{height:8px;border-radius:99px;background:var(--line2);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--c,var(--ink));transition:width .6s cubic-bezier(.4,0,.2,1)}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-top:1px solid var(--line2)}
+.row:first-child{border-top:0;padding-top:0}
+.row > span:first-child{color:var(--ink2);min-width:0}
+.row b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row b small{font-weight:500;color:var(--mut);margin-left:6px}
+.note{padding:12px 14px;border-radius:12px;background:var(--line2);font-size:14px;color:var(--ink2)}
+.note b{color:var(--ink);font-weight:600}
+.note.warn{background:var(--warn-soft);color:#6e4300}
+.note.warn b{color:#5a3700}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--line2);color:var(--ink2);white-space:nowrap}
+.pill.c{background:var(--soft);color:var(--c)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+
+/* Controlli */
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 15px;font-size:14px;font-weight:600;white-space:nowrap;min-height:42px}
+.btn:hover{border-color:#c9cdd5}
+.btn.solid{background:var(--c,var(--ink));border-color:var(--c,var(--ink));color:#fff}
+.btn.solid:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inp{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 12px;min-height:42px;min-width:0}
+.inp:focus{border-color:var(--c,var(--study));outline:0;box-shadow:0 0 0 3px var(--soft,var(--study-soft))}
+.ctrl .inp{flex:1 1 120px;max-width:200px}
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line2);cursor:pointer}
+.check:first-of-type{border-top:0}
+.check input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--c,var(--study));flex:none}
+.check.done span{color:var(--mut);text-decoration:line-through}
+.seg{display:inline-flex;background:var(--line2);border-radius:12px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:none;border-radius:9px;padding:8px 14px;font-weight:600;font-size:14px;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(23,26,32,.08)}
+
+/* Ricevuta */
+.rc{display:flex;flex-direction:column}
+.rc .ln{display:flex;align-items:baseline;gap:10px;padding:7px 0}
+.rc .ln i{flex:1;border-bottom:1px dotted #c3c7cf;transform:translateY(-4px);min-width:12px}
+.rc .nt{font-size:12.5px;color:var(--mut);margin:-4px 0 4px}
+.rc .sum{border-top:1px solid var(--line);margin-top:6px;padding-top:11px;font-weight:600}
+.rc .neg{color:var(--jp)}
+.rc input{width:5.2rem;text-align:right;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-variant-numeric:tabular-nums}
+.rc input:focus{outline:0;border-color:var(--jp);box-shadow:0 0 0 3px var(--jp-soft)}
+
+/* Itinerario */
+.route{display:flex;flex-direction:column}
+.stop{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:0 0 16px}
+.stop .rail{position:relative;display:flex;justify-content:center}
+.stop .rail::before{content:"";position:absolute;top:18px;bottom:-4px;width:2px;background:var(--line)}
+.stop:last-child .rail::before{display:none}
+.stop .rail b{width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--jp);margin-top:7px;position:relative}
+.stop h3{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.2;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.stop h3 span{font-family:var(--sans);font-size:13px;color:var(--mut);font-weight:500}
+.stop p{font-size:14px;color:var(--ink2)}
+
+/* Grafico */
+.chart{position:relative;margin:0}
+.chart svg{width:100%;height:auto;display:block;touch-action:pan-y;overflow:visible}
+.chart .gl{stroke:var(--line2)}
+.chart .ax{fill:var(--mut);font-size:11px;font-family:var(--sans)}
+.chart .tg{stroke:#b9bec8;stroke-dasharray:3 5}
+.chart .tl{fill:var(--ink2);font-size:11px;font-weight:600;font-family:var(--sans)}
+.chart .hv{stroke:var(--ink2);stroke-width:1}
+.tip{position:absolute;top:0;transform:translateX(-50%);background:var(--card);border:1px solid var(--line);box-shadow:0 6px 18px rgba(23,26,32,.1);border-radius:10px;padding:8px 11px;font-size:12.5px;pointer-events:none;white-space:nowrap;z-index:2}
+.tip b{font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;background:var(--c)}
+
+/* Righello abbonamenti */
+.ruler{position:relative;height:46px;margin:6px 8px 0}
+.ruler .axis{position:absolute;left:0;right:0;top:26px;height:2px;background:var(--line);border-radius:2px}
+.ruler .mk{position:absolute;top:21px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--card);border:2px solid var(--ink2)}
+.ruler .mk.next{border-color:var(--study);background:var(--study)}
+.ruler .mk span{position:absolute;top:-21px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;color:var(--ink2)}
+.ruler .td{position:absolute;top:12px;width:2px;height:30px;background:var(--jp);margin-left:-1px;border-radius:2px}
+.ruler .td span{position:absolute;top:31px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--jp);text-transform:uppercase;letter-spacing:.06em}
+.split{display:flex;gap:3px;height:10px;border-radius:99px;overflow:hidden}
+.split i{display:block;height:100%}
+
+/* Tabella */
+.tbl-wrap{overflow-x:auto;margin-inline:-4px}
+.tbl{width:100%;border-collapse:collapse;min-width:520px;font-size:14px}
+.tbl th{text-align:left;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);padding:0 12px 10px 4px}
+.tbl td{padding:11px 12px 11px 4px;border-top:1px solid var(--line2);font-variant-numeric:tabular-nums}
+.tbl td:first-child{font-weight:600}
+
+/* Tappe */
+.ev{display:grid;grid-template-columns:minmax(0,1fr);gap:2px 22px;padding:14px 0;border-top:1px solid var(--line2)}
+.ev:first-child{border-top:0;padding-top:0}
+@media (min-width:720px){.ev{grid-template-columns:11rem minmax(0,1fr)}}
+.ev .when{font-size:13px;font-weight:600;color:var(--mut);padding-top:3px}
+.ev.key .when{color:var(--c,var(--jp))}
+.ev h3{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.25}
+.ev p{font-size:14px;color:var(--ink2);max-width:62ch}
+
+/* Studio */
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.strip button{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:left;min-width:0}
+.strip button:hover{border-color:#c9cdd5}
+.strip .m{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.strip .n{display:block;font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:500}
+.strip .c{font-size:12px;color:var(--mut)}
+.strip button.next{border-color:var(--study);box-shadow:0 0 0 1px var(--study)}
+.strip button.next .m{color:var(--study)}
+.course h3{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.25;text-wrap:balance;min-width:0}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 16px;margin:0;font-size:14px}
+.facts dt{color:var(--mut)}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.facts dd strong{font-weight:600}
+.sess{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.sess button{border:1px solid var(--line);background:var(--card);border-radius:10px;min-height:46px;padding:6px 4px;font-weight:600;font-size:14px;line-height:1.15}
+.sess button small{display:block;font-weight:500;font-size:11px;color:var(--mut)}
+.sess button:hover:not(:disabled){border-color:#c9cdd5}
+.sess button[aria-pressed="true"]{background:var(--study);border-color:var(--study);color:#fff}
+.sess button[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+.sess button:disabled{opacity:.35;cursor:not-allowed}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:500;color:var(--ink2)}
+.chip:hover{border-color:#c9cdd5;color:var(--ink)}
+.chip.on{background:var(--study-soft);border-color:transparent;color:var(--study)}
+details{font-size:13.5px;color:var(--ink2)}
+details summary{cursor:pointer;color:var(--study);font-weight:600}
+details ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line2)}
+.srow:first-child{border-top:0;padding-top:0}
+.srow strong{display:block;font-weight:600;line-height:1.3}
+.srow span.s{font-size:13px;color:var(--mut)}
+.done-list{display:flex;flex-direction:column}
+.done-list div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line2);font-size:14.5px;color:var(--ink2)}
+.done-list div:first-child{border-top:0}
+.week{padding:12px 0;border-top:1px solid var(--line2)}
+.week:first-child{border-top:0;padding-top:0}
+.week.now{background:var(--study-soft);margin-inline:-12px;padding:12px;border-radius:12px;border-top-color:transparent}
+.week-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.week-h b{font-family:var(--serif);font-weight:500;font-size:18px}
+.week-h span{font-size:12.5px;color:var(--mut)}
+.week.now .week-h span{color:var(--study);font-weight:600}
+.les{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;font-size:14px;padding:3px 0}
+.les .d{font-size:12.5px;color:var(--mut);padding-top:1px}
+.les .n small{display:block;color:var(--mut);font-size:12.5px}
+.les.clash .n{color:var(--warn)}
+.sec-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:8px}
+.sec-title h2{font-family:var(--serif);font-weight:500;font-size:26px}
+.sec-title span{font-size:13px;color:var(--mut)}
+.arm{border-color:var(--warn)!important;color:var(--warn)!important}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <button type="button" class="theme" id="theme" aria-label="Cambia tema">Tema: auto</button>
-    <h1>Piano<br>esami</h1>
-    <p class="who">Mattia Tringale · matr. 19136 · DAPL06 · 3° anno</p>
-    <div class="stats" id="stats"></div>
-    <div class="strip" id="strip"></div>
-    <div class="banner" id="banner" hidden>
-      <span>Le sessioni sono già riempite con una proposta. Cambiale come vuoi: tocca una sessione su ogni materia.</span>
-      <button type="button" id="banner-ok">Ok</button>
-    </div>
-  </header>
-  <main id="view" class="view"></main>
-</div>
+<div id="root"></div>
 
-<nav class="nav" aria-label="Viste">
-  <div class="nav-in">
-    <button type="button" data-v="materie">Materie</button>
-    <button type="button" data-v="sessioni">Sessioni</button>
-    <button type="button" data-v="lezioni">Lezioni</button>
-  </div>
-</nav>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
 <script>
-/* ---------- Dati dal palinsesto 1° semestre 2026/27 (versione 06/10/2026) ---------- */
-const WEEKS = { // lunedì di ogni settimana di lezione + etichetta del palinsesto
-  1:['2026-09-28','28.09 – 03.10'], 2:['2026-10-05','05.10 – 10.10'], 3:['2026-10-12','12.10 – 17.10'],
-  4:['2026-10-19','19.10 – 24.10'], 5:['2026-10-26','26.10 – 31.10'], 6:['2026-11-02','02.11 – 07.11'],
-  7:['2026-11-09','09.11 – 14.11'], 8:['2026-11-16','16.11 – 21.11'], 9:['2026-11-23','23.11 – 28.11'],
-  10:['2026-11-30','30.11 – 04.12'], 11:['2027-01-04','07.01 – 09.01'], 12:['2027-01-11','11.01 – 16.01'],
-  13:['2027-01-18','18.01 – 23.01'], 14:['2027-01-25','25.01 – 30.01'], 15:['2027-02-01','01.02 – 03.02']
-};
-const DAYS = { LMM:{first:0,last:2,label:'Lun Mar Mer',short:'L M M'}, GV:{first:3,last:4,label:'Gio Ven',short:'G V'} };
+'use strict';
+const { useState, useEffect, useRef } = React;
+const html = htm.bind(React.createElement);
 
+/* ================= Utilità ================= */
+const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const toDate = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const nextFri = d => addDays(d, (5 - d.getDay() + 7) % 7);
+const monthDate = m => { const p = m.split('-').map(Number); return new Date(p[0], p[1] - 1, 15); };
+const fmtDate = (d, o) => d.toLocaleDateString('it-IT', o || { day: 'numeric', month: 'short', year: 'numeric' });
+const plain = (n, dec) => n.toLocaleString('it-IT', { useGrouping: 'always', minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+const eur = (n, dec) => plain(n, dec) + ' €';
+const pct = (v, t) => Math.min(100, Math.max(0, v / t * 100));
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const MON = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const fmtS = (dt, yr) => dt.getDate() + ' ' + MON[dt.getMonth()] + (yr ? ' ' + dt.getFullYear() : '');
+const daysBetween = (a, b) => Math.round((startOfDay(b) - startOfDay(a)) / 864e5);
+function usePersist(key, init) {
+  const [v, setV] = useState(() => { let r = null; try { r = JSON.parse(localStorage.getItem(key)); } catch (e) {} return init(r); });
+  useEffect(() => { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }, [key, v]);
+  return [v, setV];
+}
+
+/* ================= Soldi: costanti del piano ================= */
+const TARGET_J = 3940, TARGET_C = 5000, WEEKLY = 60, BORSA = 750;
+const TRIP_END = new Date(2027, 7, 1);
+const SIM_END = new Date(2028, 8, 30);
+const CPH_JUL = new Date(2028, 6, 15), CPH_SEP = new Date(2028, 8, 1);
+const DAYS_TRIP = 19, FOOD_DAY = 35;
+const FIXED = [
+  { k: 'Voli', v: 950, n: 'Intercontinentale 650–750 + Okinawa 150–250' },
+  { k: 'Alloggi, 19 notti', v: 1050, n: 'Circa 55 a notte, camera divisa in due' },
+  { k: 'Treni e metro', v: 320, n: 'Un solo Shinkansen, Osaka in treno locale' },
+  { k: 'Cibo', v: FOOD_DAY * DAYS_TRIP, n: FOOD_DAY + ' € al giorno per ' + DAYS_TRIP + ' giorni' }
+];
+const EXTRAS = [
+  { id: 'ass', k: 'Assicurazione di viaggio' }, { id: 'esim', k: 'eSIM o pocket wifi' },
+  { id: 'ingr', k: 'Ingressi e attività' }, { id: 'imp', k: 'Imprevisti e cambio' }
+];
+const IPHONES = [
+  { v: 0, l: 'Nessuno' }, { v: 1149, l: 'iPhone 17 Pro 256 GB, offerta · 1.149 €' },
+  { v: 1489, l: 'iPhone 18 Pro 256 GB · 1.489 €' }, { v: 1739, l: 'iPhone 18 Pro 512 GB · 1.739 €' }
+];
+const SUBS = [
+  { day: 3, name: 'Amazon', amt: 2.49 }, { day: 5, name: 'iCloud', amt: 9.99 },
+  { day: 16, name: 'HBO', amt: 5.99 }, { day: 30, name: 'Claude', amt: 20 }
+];
+const ROUTE = [
+  { c: 'Tokyo', n: '6–7 notti', d: 'Atterraggio, esplorazione metropolitana e design.' },
+  { c: 'Kyoto', n: '4 notti', d: "Con lo Shinkansen, l'unico treno veloce del viaggio." },
+  { c: 'Osaka', n: '3 notti', d: 'Treno locale da 3,60 €. Street food e mercatini.' },
+  { c: 'Okinawa', n: '5–6 notti', d: 'Volo interno da Osaka. Spiagge, relax e riposo.' },
+  { c: 'Rientro', n: '', d: "Volo da Okinawa a Tokyo o Osaka, poi diretto verso l'Italia." }
+];
+const CHECKLIST = [
+  { g: 'Giappone', c: 'var(--jp)', items: [
+    ['t1', 'Tracker A su Google Flights e Skyscanner: Roma/Milano, Tokyo e Osaka, multi-tratta'],
+    ['t2', 'Tracker B: Roma/Milano, Tokyo, andata e ritorno'],
+    ['t3', 'Comprare il volo intercontinentale se scende sotto 750 €'],
+    ['t4', "Verificare se un pass ferroviario conviene davvero sull'itinerario"],
+    ['t5', 'Assicurazione di viaggio ed eSIM'],
+    ['t6', 'Prenotare voli e alloggi (febbraio–marzo 2027)']
+  ] },
+  { g: 'Studio e portfolio', c: 'var(--study)', items: [
+    ['s0', 'Inviare il modulo delle discipline a scelta entro il 16 novembre 2026'],
+    ['s1', 'Chiudere gli esami in Accademia a Catania'],
+    ['s2', 'Archiviare bozze, wireframe ed esecutivi dei progetti dello studio'],
+    ['s3', 'Selezionare i casi studio migliori (Cantalupo, Museo Tattile)'],
+    ['s4', 'Impaginare i casi studio in inglese']
+  ] },
+  { g: 'Copenaghen', c: 'var(--cph)', items: [
+    ['c1', 'Prenotare IELTS Academic al computer (target minimo 6.5)'],
+    ['c2', 'CV in inglese'],
+    ['c3', 'Aprire il profilo su s.dk per il Kollegium'],
+    ['c4', 'Candidatura sul portale entro il 1 marzo 2028'],
+    ['c5', 'Verificare su su.dk i requisiti del sussidio SU']
+  ] }
+];
+
+const num = (v, d) => (typeof v === 'number' && isFinite(v) ? v : d);
+const MONEY_DEFAULTS = () => ({
+  japan: 1540, cph: 3500, lastDeposit: null,
+  scen: { b1: false, b1m: '2026-12', b2: false, b2m: '2027-05', iphone: 0 },
+  extras: { ass: 60, esim: 25, ingr: 150, imp: 165 }, checks: {}
+});
+function loadMoney(s) {
+  const st = MONEY_DEFAULTS();
+  if (s && typeof s === 'object') {
+    st.japan = Math.min(TARGET_J, Math.max(0, num(s.japan, st.japan)));
+    st.cph = Math.max(0, num(s.cph, st.cph));
+    st.lastDeposit = typeof s.lastDeposit === 'string' ? s.lastDeposit : null;
+    if (s.scen) {
+      st.scen.b1 = !!s.scen.b1; st.scen.b2 = !!s.scen.b2;
+      if (/^\d{4}-\d{2}$/.test(s.scen.b1m)) st.scen.b1m = s.scen.b1m;
+      if (/^\d{4}-\d{2}$/.test(s.scen.b2m)) st.scen.b2m = s.scen.b2m;
+      st.scen.iphone = IPHONES.some(p => p.v === s.scen.iphone) ? s.scen.iphone : 0;
+    }
+    if (s.extras) EXTRAS.forEach(x => { st.extras[x.id] = Math.max(0, num(s.extras[x.id], st.extras[x.id])); });
+    if (s.checks && typeof s.checks === 'object') st.checks = s.checks;
+  }
+  return st;
+}
+
+/* Simulazione settimanale: ogni venerdì 60 €, prima al Giappone fino all'obiettivo, poi a Copenaghen.
+   A fine luglio 2027 il fondo Giappone si spende nel viaggio. */
+function simulate(sc, cur, lastDeposit) {
+  const today = startOfDay(new Date());
+  let j = cur.japan, c = cur.cph - (sc.iphone || 0);
+  let first = nextFri(today);
+  if (lastDeposit === iso(today) && iso(first) === iso(today)) first = addDays(first, 7);
+  const lumps = [];
+  if (sc.b1) lumps.push({ d: monthDate(sc.b1m), a: BORSA, done: false });
+  if (sc.b2) lumps.push({ d: monthDate(sc.b2m), a: BORSA, done: false });
+  const pts = [{ d: today, j, c, trip: false }];
+  let trip = today >= TRIP_END, n = 0;
+  if (trip) j = 0;
+  let jDate = (!trip && j >= TARGET_J) ? today : null, jWeeks = jDate ? 0 : null;
+  let cDate = c >= TARGET_C ? today : null;
+  const add = a => { if (!trip) { const t = Math.max(0, Math.min(a, TARGET_J - j)); j += t; a -= t; } c += a; };
+  for (let d = first; d <= SIM_END; d = addDays(d, 7)) {
+    if (!trip && d >= TRIP_END) { trip = true; j = 0; }
+    for (const l of lumps) { if (!l.done && l.d <= d) { add(l.a); l.done = true; } }
+    add(WEEKLY); n++;
+    if (jDate === null && !trip && j >= TARGET_J) { jDate = d; jWeeks = n; }
+    if (cDate === null && c >= TARGET_C) cDate = d;
+    pts.push({ d, j, c, trip });
+  }
+  return { pts, first, jDate, jWeeks, cDate,
+    at(date) { let p = pts[0]; for (const q of pts) { if (q.d <= date) p = q; else break; } return p; } };
+}
+function nextSub(now) {
+  let best = null;
+  const dim = (y, m) => new Date(y, m + 1, 0).getDate();
+  SUBS.forEach(s => {
+    let d = new Date(now.getFullYear(), now.getMonth(), Math.min(s.day, dim(now.getFullYear(), now.getMonth())));
+    if (d < now) d = new Date(now.getFullYear(), now.getMonth() + 1, Math.min(s.day, dim(now.getFullYear(), now.getMonth() + 1)));
+    if (!best || d < best.d) best = { s, d };
+  });
+  return best;
+}
+const dateTxt = d => d ? (d <= startOfDay(new Date()) ? 'Raggiunto' : fmtDate(d)) : 'Dopo il viaggio';
+function scenarioText(sc) {
+  const parts = [];
+  if (sc.b1) parts.push('borsa, prima rata ' + fmtDate(monthDate(sc.b1m), { month: 'short', year: 'numeric' }));
+  if (sc.b2) parts.push('seconda rata ' + fmtDate(monthDate(sc.b2m), { month: 'short', year: 'numeric' }));
+  if (sc.iphone) parts.push('iPhone ' + eur(sc.iphone));
+  return parts.length ? parts.join(' · ') : 'base, senza borsa e senza iPhone';
+}
+
+/* ================= Studio: palinsesto 1° semestre 2026/27 ================= */
+const WEEKS = {
+  1:['2026-09-28','28 set – 3 ott'], 2:['2026-10-05','5 – 10 ott'], 3:['2026-10-12','12 – 17 ott'],
+  4:['2026-10-19','19 – 24 ott'], 5:['2026-10-26','26 – 31 ott'], 6:['2026-11-02','2 – 7 nov'],
+  7:['2026-11-09','9 – 14 nov'], 8:['2026-11-16','16 – 21 nov'], 9:['2026-11-23','23 – 28 nov'],
+  10:['2026-11-30','30 nov – 4 dic'], 11:['2027-01-04','7 – 9 gen'], 12:['2027-01-11','11 – 16 gen'],
+  13:['2027-01-18','18 – 23 gen'], 14:['2027-01-25','25 – 30 gen'], 15:['2027-02-01','1 – 3 feb']
+};
+const WD = { LMM:{ first:0, last:2, label:'Lun Mar Mer', short:'Lun Mar Mer' }, GV:{ first:3, last:4, label:'Gio Ven', short:'Gio Ven' } };
 const COURSES = [
   {id:'962',y:1,name:'Comunicazione pubblicitaria 1',done:true},
   {id:'927',y:1,name:'Fondamenti di informatica',done:true},
@@ -229,7 +432,6 @@ const COURSES = [
   {id:'138',y:1,name:"Storia dell'arte contemporanea 1",done:true},
   {id:'963',y:1,name:"Tecniche dell'incisione calcografica",cfa:8,prof:'Daniela Maria Costa',
     slots:[{w:[2,3],d:'LMM',t:'08:45-13:15',p:'Barletta, aula 1'},{w:[6,7,9,11,13,14],d:'GV',t:'08:45-13:15',p:'Barletta, aula 2'}]},
-
   {id:'415',y:2,name:'Computer graphic',done:true},
   {id:'966',y:2,name:'Comunicazione pubblicitaria 2',done:true},
   {id:'498',y:2,name:'Design',done:true},
@@ -239,7 +441,6 @@ const COURSES = [
   {id:'965',y:2,name:'Storia della stampa e della editoria',done:true},
   {id:'824',y:2,name:'Web design',cfa:10,prof:'Ciro Esposito',
     slots:[{w:[8,9,10,12,13,14,15],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 9'}]},
-
   {id:'956',y:3,name:'Elementi di grafica editoriale',cfa:10,prof:'Marco Lo Curzio',
     slots:[{w:[8,9],d:'LMM',t:'08:45-13:15',p:'Franchetti, Aula Magna'},{w:[10,12,13,14,15],d:'LMM',t:'08:45-13:15',p:'Franchetti, aula 9'}]},
   {id:'746',y:3,name:'Fotografia digitale',sem2:true},
@@ -250,350 +451,730 @@ const COURSES = [
     slots:[{w:[1,2,3,4,5],d:'LMM',t:'11:00-13:15',p:'Franchetti, aula 10'}]},
   {id:'199',y:3,name:'Teoria e metodo dei mass media',sem2:true},
   {id:'355',y:3,name:'Elaborato di sintesi finale (tesi)',cfa:8,thesis:true},
-
   {id:'LAY',y:'S',name:'Layout e tecniche di visualizzazione',cfa:8,prof:'Giorgio Morara',from:'dal corso di Fotografia, 2° anno',
     slots:[{w:[7,8,9],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 13'},{w:[10,12,13],d:'LMM',t:'14:00-18:15',p:'Franchetti, aula 5'}]},
   {id:'ECO',y:'S',name:'Ecodesign',cfa:6,prof:'Giovanni Pedone',from:'dal corso di Fashion design, 2° anno',
     slots:[{w:[9,10,11,12,13,14],d:'GV',t:'08:45-13:15',p:'Franchetti, aula 11'}]}
 ];
-
-const SESS = [ // sessioni d'esame dal Manifesto degli studi 2026/27
+const SESS = [
   {k:'dic',label:'Dicembre',short:'Dic',year:'2026',start:'2026-12-01'},
   {k:'feb',label:'Febbraio',short:'Feb',year:'2027',start:'2027-02-04'},
   {k:'giu',label:'Giugno',short:'Giu',year:'2027',start:'2027-06-01'},
   {k:'set',label:'Settembre',short:'Set',year:'2027',start:'2027-09-01'}
 ];
-const DSESS = [ // sessioni di diploma
+const DSESS = [
   {k:'d-giu',label:'Giugno',short:'Giu',year:'2027'},{k:'d-set',label:'Settembre',short:'Set',year:'2027'},
   {k:'d-dic',label:'Dicembre',short:'Dic',year:'2027'},{k:'d-feb',label:'Febbraio',short:'Feb',year:'2028'}
 ];
 const YEARS = [{k:1,label:'1° anno'},{k:2,label:'2° anno'},{k:3,label:'3° anno'},{k:'S',label:'A scelta'}];
-
-/* ---------- Date ---------- */
-const MON = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
-const toDate = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y,m-1,d); };
-const addDays = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; };
-const fmt = (dt,yr) => dt.getDate()+' '+MON[dt.getMonth()]+(yr?' '+dt.getFullYear():'');
-const mins = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
-const range = t => t.split('-').map(mins);
-const pretty = t => t.replace('-',' – ');
-
-function span(c){
-  if(!c.slots) return null;
-  let first=null,last=null;
-  c.slots.forEach(s=>{
-    const f = addDays(toDate(WEEKS[Math.min(...s.w)][0]), DAYS[s.d].first);
-    const l = addDays(toDate(WEEKS[Math.max(...s.w)][0]), DAYS[s.d].last);
-    if(!first||f<first) first=f;
-    if(!last||l>last) last=l;
+const byId = id => COURSES.find(c => c.id === id);
+const mins = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const trange = t => t.split('-').map(mins);
+const prettyT = t => t.replace('-', ' – ');
+function span(c) {
+  if (!c.slots) return null;
+  let first = null, last = null;
+  c.slots.forEach(s => {
+    const f = addDays(toDate(WEEKS[Math.min(...s.w)][0]), WD[s.d].first);
+    const l = addDays(toDate(WEEKS[Math.max(...s.w)][0]), WD[s.d].last);
+    if (!first || f < first) first = f;
+    if (!last || l > last) last = l;
   });
-  return {first,last};
+  return { first, last };
 }
-function weeksText(arr){
-  const a=[...arr].sort((x,y)=>x-y), out=[]; let s=a[0], p=a[0];
-  for(let i=1;i<=a.length;i++){
-    if(a[i]===p+1){p=a[i];continue;}
-    out.push(s===p?String(s):s+'–'+p); s=a[i]; p=a[i];
-  }
+function weeksText(arr) {
+  const a = [...arr].sort((x, y) => x - y), out = []; let s = a[0], p = a[0];
+  for (let i = 1; i <= a.length; i++) { if (a[i] === p + 1) { p = a[i]; continue; } out.push(s === p ? String(s) : s + '–' + p); s = a[i]; p = a[i]; }
   return out.join(', ');
 }
-function clashWeeks(a,b){
-  const hit=new Set();
-  (a.slots||[]).forEach(sa=>(b.slots||[]).forEach(sb=>{
-    if(sa.d!==sb.d) return;
-    const [a1,a2]=range(sa.t),[b1,b2]=range(sb.t);
-    if(a1<b2&&b1<a2) sa.w.forEach(w=>{ if(sb.w.includes(w)) hit.add(w); });
+function clashWeeks(a, b) {
+  const hit = new Set();
+  (a.slots || []).forEach(sa => (b.slots || []).forEach(sb => {
+    if (sa.d !== sb.d) return;
+    const [a1, a2] = trange(sa.t), [b1, b2] = trange(sb.t);
+    if (a1 < b2 && b1 < a2) sa.w.forEach(w => { if (sb.w.includes(w)) hit.add(w); });
   }));
-  return [...hit].sort((x,y)=>x-y);
+  return [...hit].sort((x, y) => x - y);
 }
+const EXAM_DEFAULTS = () => {
+  const attend = {};
+  COURSES.forEach(c => { if (!c.done && !c.thesis) attend[c.id] = (c.y === 3 || c.y === 'S'); });
+  return { plan: {'968':'dic','1136':'dic','503':'dic','LAY':'feb','ECO':'feb','956':'feb','824':'feb','746':'giu','504':'giu','199':'giu','355':'d-giu'},
+    passed: {}, attend, tab: 'materie' };
+};
+const MODULO_DUE = addDays(span(byId('LAY')).first, 7);   // 16 novembre 2026
 
-/* ---------- Stato (salvato su questo telefono) ---------- */
-const KEY='pianoEsami.mattia.v2';
-const byId = id => COURSES.find(c=>c.id===id);
-function defaults(){
-  const attend={};
-  COURSES.forEach(c=>{ if(!c.done&&!c.thesis) attend[c.id] = (c.y===3||c.y==='S'); });
-  return {
-    plan:{'968':'dic','1136':'dic','503':'dic','LAY':'feb','ECO':'feb','956':'feb','824':'feb','746':'giu','504':'giu','199':'giu','355':'d-giu'},
-    passed:{}, attend, view:'materie', bannerSeen:false
+function examApi(E) {
+  const isDone = c => c.done || !!E.passed[c.id];
+  const attends = c => !!E.attend[c.id];
+  const eligible = (c, s) => {
+    if (isDone(c) || c.thesis) return false;
+    if (!attends(c)) return true;
+    if (c.sem2) return s.k === 'giu' || s.k === 'set';
+    return span(c).last < toDate(s.start);
   };
+  const earliest = c => SESS.find(s => eligible(c, s));
+  const exams = () => COURSES.filter(c => !isDone(c) && !c.thesis);
+  const nextSession = () => { const t = new Date(); return SESS.find(s => toDate(s.start) >= addDays(t, -20)) || SESS[SESS.length - 1]; };
+  return { isDone, attends, eligible, earliest, exams, nextSession };
 }
-let state;
-try{ state = JSON.parse(localStorage.getItem(KEY)) || defaults(); }catch(e){ state = defaults(); }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
-
-const isDone = c => c.done || !!state.passed[c.id];
-const pending = () => COURSES.filter(c=>!isDone(c));
-const exams = () => pending().filter(c=>!c.thesis);
-const attends = c => !!state.attend[c.id];
-
-function earliest(c){ return SESS.find(s=>eligible(c,s)); }
-function eligible(c,s){
-  if(isDone(c)||c.thesis) return false;
-  if(!attends(c)) return true;                       // frequenza già fatta: qualsiasi sessione
-  if(c.sem2) return s.k==='giu'||s.k==='set';        // lezioni nel 2° semestre
-  return span(c).last < toDate(s.start);
+function weekOf(date) {
+  for (const w of Object.keys(WEEKS).map(Number)) { const m = toDate(WEEKS[w][0]); if (date >= m && date < addDays(m, 7)) return w; }
+  return null;
 }
-function nextSession(){ const t=new Date(); return SESS.find(s=>toDate(s.start)>=addDays(t,-20)) || SESS[SESS.length-1]; }
-
-/* ---------- Helpers DOM ---------- */
-function h(tag, attrs, ...kids){
-  const el=document.createElement(tag);
-  if(attrs) for(const [k,v] of Object.entries(attrs)){
-    if(v==null||v===false) continue;
-    if(k==='class') el.className=v;
-    else if(k.startsWith('on')) el.addEventListener(k.slice(2),v);
-    else if(k==='html') el.innerHTML=v;
-    else el.setAttribute(k, v===true?'':v);
-  }
-  kids.flat().forEach(k=>{ if(k==null||k===false) return; el.append(k.nodeType?k:document.createTextNode(k)); });
-  return el;
-}
-function setPlan(id,k){ if(state.plan[id]===k) delete state.plan[id]; else state.plan[id]=k; save(); render(); }
-
-/* ---------- Testata ---------- */
-function renderTop(){
-  const ex=exams(), planned=ex.filter(c=>SESS.some(s=>s.k===state.plan[c.id]));
-  const cfa=ex.reduce((a,c)=>a+(c.cfa||0),0);
-  const unknown=ex.filter(c=>!c.cfa).length;
-  document.getElementById('stats').replaceChildren(
-    h('div',{class:'stat'},h('b',null,String(ex.length)),h('span',null,'esami da dare')),
-    h('div',{class:'stat'},h('b',null,planned.length+'/'+ex.length),h('span',null,'programmati')),
-    h('div',{class:'stat'},h('b',null,cfa+(unknown?'+':'')),h('span',null,unknown?'CFA noti da dare':'CFA da dare'))
-  );
-  const nx=nextSession();
-  document.getElementById('strip').replaceChildren(...SESS.map(s=>{
-    const list=ex.filter(c=>state.plan[c.id]===s.k);
-    const cf=list.reduce((a,c)=>a+(c.cfa||0),0);
-    return h('button',{type:'button',class:s.k===nx.k?'next':null,onclick:()=>go('sessioni','s-'+s.k),'aria-label':s.label+' '+s.year+': '+list.length+' esami'},
-      h('span',{class:'m'},s.short+' '+s.year.slice(2)),
-      h('span',{class:'n'},String(list.length)),
-      h('span',{class:'c'},cf+' CFA'+(list.some(c=>!c.cfa)?'+':'')));
-  }));
-  document.getElementById('banner').hidden=!!state.bannerSeen;
+function lessonsInWeek(E, w) {
+  const api = examApi(E), rows = [];
+  COURSES.filter(c => !api.isDone(c) && c.slots && api.attends(c)).forEach(c => c.slots.forEach(s => { if (s.w.includes(w)) rows.push({ c, s }); }));
+  rows.sort((a, b) => WD[a.s.d].first - WD[b.s.d].first || mins(a.s.t.split('-')[0]) - mins(b.s.t.split('-')[0]));
+  return rows;
 }
 
-/* ---------- Vista Materie ---------- */
-function courseCard(c){
-  const sp=span(c), att=attends(c), ear=earliest(c);
-  const card=h('article',{class:'card',id:'c-'+c.id});
-  card.append(h('div',null,
-    c.y==='S'?h('span',{class:'tag'},'A scelta · '+c.from):null,
-    h('div',{class:'card-h'},h('h3',null,c.name),h('span',{class:'cfa'},c.cfa?c.cfa+' CFA':'CFA —'))));
-  if(c.prof) card.append(h('p',{class:'prof'},'Prof. '+c.prof));
+/* ================= Componenti di base ================= */
+const Bar = ({ p, c }) => html`<div className="bar" style=${{ '--c': c }}><i style=${{ width: p + '%' }}></i></div>`;
+const Row = ({ k, v, sub }) => html`<div className="row"><span>${k}</span><b>${v}${sub ? html`<small>${sub}</small>` : null}</b></div>`;
+const Head = ({ eyebrow, title, lede, c }) => html`
+  <header className="ph" style=${{ '--c': c }}>
+    <span className="eyebrow">${eyebrow}</span>
+    <h1>${title}</h1>
+    ${lede ? html`<p>${lede}</p>` : null}
+  </header>`;
 
-  const facts=h('dl',{class:'facts'});
-  if(c.thesis){
-    facts.append(h('dt',null,'Sessioni'),h('dd',null,'Diploma: giu 27, set 27, dic 27, feb 28'));
-  }else if(c.sem2){
-    facts.append(h('dt',null,'Lezioni'),h('dd',null,'2° semestre, palinsesto non ancora uscito'));
-    facts.append(h('dt',null,'Esame'),h('dd',null,h('strong',null,att?'da giugno 2027':'da dicembre 2026')));
-  }else{
-    const days=[...new Set(c.slots.map(s=>DAYS[s.d].label))].join(' / ');
-    const times=[...new Set(c.slots.map(s=>pretty(s.t)))].join(' / ');
-    if(att){
-      facts.append(h('dt',null,'Inizio'),h('dd',null,h('strong',null,fmt(sp.first,true))));
-      facts.append(h('dt',null,'Fine'),h('dd',null,h('strong',null,fmt(sp.last,true))));
-    }else{
-      facts.append(h('dt',null,'Lezioni'),h('dd',null,fmt(sp.first)+' → '+fmt(sp.last,true)+' (già frequentata)'));
-    }
-    facts.append(h('dt',null,'Quando'),h('dd',null,days+', '+times));
-    facts.append(h('dt',null,'Esame'),h('dd',null,h('strong',null,ear?'da '+ear.label.toLowerCase()+' '+ear.year:'—')));
-  }
-  card.append(facts);
+function Chart({ sim, j, c, t1 }) {
+  const [hv, setHv] = useState(null);
+  const W = 720, H = 280, pl = 44, pr = 10, pt = 18, pb = 30;
+  const T0 = sim.pts[0].d.getTime(), T1 = (t1 || SIM_END).getTime();
+  const pts = sim.pts.filter(p => p.d.getTime() <= T1);
+  let m = 0;
+  if (j) { m = TARGET_J; pts.forEach(p => { if (!p.trip) m = Math.max(m, p.j); }); }
+  if (c) { m = Math.max(m, TARGET_C); pts.forEach(p => { m = Math.max(m, p.c); }); }
+  const ymax = Math.ceil(m * 1.04 / 1000) * 1000, step = ymax > 6000 ? 2000 : 1000;
+  const X = t => pl + (t - T0) / (T1 - T0) * (W - pl - pr), Y = v => pt + (1 - v / ymax) * (H - pt - pb);
+  const grid = []; for (let v = 0; v <= ymax; v += step) grid.push(v);
+  const months = []; let d = new Date(sim.pts[0].d.getFullYear(), sim.pts[0].d.getMonth() + 1, 1);
+  while (d.getTime() <= T1) { if (d.getMonth() % 3 === 0) months.push(new Date(d)); d = new Date(d.getFullYear(), d.getMonth() + 1, 1); }
+  const line = (arr, key) => arr.map((p, i) => (i ? 'L' : 'M') + X(p.d.getTime()).toFixed(1) + ' ' + Y(p[key]).toFixed(1)).join('');
+  const area = (arr, key) => arr.length ? line(arr, key) + 'L' + X(arr[arr.length - 1].d.getTime()).toFixed(1) + ' ' + Y(0) + 'L' + X(arr[0].d.getTime()).toFixed(1) + ' ' + Y(0) + 'Z' : '';
+  const jp = pts.filter(p => !p.trip);
+  const ref = useRef(null);
+  const move = e => {
+    const r = ref.current.getBoundingClientRect();
+    const t = T0 + ((e.clientX - r.left) / r.width * W - pl) / (W - pl - pr) * (T1 - T0);
+    let best = pts[0], bd = Infinity;
+    for (const p of pts) { const dd = Math.abs(p.d.getTime() - t); if (dd < bd) { bd = dd; best = p; } }
+    const px = X(best.d.getTime());
+    setHv({ p: best, px, left: Math.min(Math.max(px / W * r.width, 80), r.width - 80) });
+  };
+  const tripX = X(TRIP_END.getTime());
+  return html`
+    <figure className="chart">
+      ${hv ? html`<div className="tip" style=${{ left: hv.left + 'px' }}>
+        <span className="muted">${fmtDate(hv.p.d)}</span>
+        ${j && !hv.p.trip ? html`<br/>Giappone <b>${eur(hv.p.j)}</b>` : null}
+        ${c ? html`<br/>Copenaghen <b>${eur(hv.p.c)}</b>` : null}
+      </div>` : null}
+      <svg ref=${ref} viewBox=${'0 0 ' + W + ' ' + H} role="img" aria-label="Andamento previsto dei fondi"
+        onPointerMove=${move} onPointerDown=${move} onPointerLeave=${() => setHv(null)}>
+        ${grid.map(v => html`<g key=${'g' + v}><line className="gl" x1=${pl} x2=${W - pr} y1=${Y(v)} y2=${Y(v)}/><text className="ax" x=${pl - 8} y=${Y(v) + 4} textAnchor="end">${v / 1000}k</text></g>`)}
+        ${months.map(mm => html`<text key=${'m' + mm.getTime()} className="ax" x=${X(mm.getTime())} y=${H - 8} textAnchor="middle">${mm.toLocaleDateString('it-IT', { month: 'short', year: '2-digit' })}</text>`)}
+        ${j ? html`<g><line className="tg" x1=${pl} x2=${W - pr} y1=${Y(TARGET_J)} y2=${Y(TARGET_J)}/><text className="tl" x=${pl + 6} y=${Y(TARGET_J) - 7}>Giappone ${plain(TARGET_J)} €</text></g>` : null}
+        ${c ? html`<g><line className="tg" x1=${pl} x2=${W - pr} y1=${Y(TARGET_C)} y2=${Y(TARGET_C)}/><text className="tl" x=${W - pr - 2} y=${Y(TARGET_C) - 7} textAnchor="end">Copenaghen ${plain(TARGET_C)} €</text></g>` : null}
+        ${TRIP_END.getTime() < T1 ? html`<g><line className="tg" x1=${tripX} x2=${tripX} y1=${pt} y2=${H - pb}/><text className="tl" x=${tripX - 6} y=${pt + 10} textAnchor="end">Viaggio</text></g>` : null}
+        ${c ? html`<path d=${area(pts, 'c')} fill="var(--cph)" opacity="0.08"/>` : null}
+        ${j ? html`<path d=${area(jp, 'j')} fill="var(--jp)" opacity="0.09"/>` : null}
+        ${c ? html`<path d=${line(pts, 'c')} fill="none" stroke="var(--cph)" strokeWidth="2.5" strokeLinejoin="round"/>` : null}
+        ${j ? html`<path d=${line(jp, 'j')} fill="none" stroke="var(--jp)" strokeWidth="2.5" strokeLinejoin="round"/>` : null}
+        ${j && sim.jDate && sim.jDate.getTime() <= T1 ? html`<circle cx=${X(sim.jDate.getTime())} cy=${Y(TARGET_J)} r="5.5" fill="var(--jp)" stroke="#fff" strokeWidth="2"/>` : null}
+        ${c && sim.cDate && sim.cDate.getTime() <= T1 ? html`<circle cx=${X(sim.cDate.getTime())} cy=${Y(TARGET_C)} r="5.5" fill="var(--cph)" stroke="#fff" strokeWidth="2"/>` : null}
+        ${hv ? html`<line className="hv" x1=${hv.px} x2=${hv.px} y1=${pt} y2=${H - pb}/>` : null}
+      </svg>
+      <figcaption className="legend" style=${{ marginTop: '10px' }}>
+        ${j ? html`<span style=${{ '--c': 'var(--jp)' }}><i></i>Giappone</span>` : null}
+        ${c ? html`<span style=${{ '--c': 'var(--cph)' }}><i></i>Copenaghen</span>` : null}
+        <span>Tocca o passa sul grafico per leggere i valori</span>
+      </figcaption>
+    </figure>`;
+}
 
-  // sovrapposizioni con altre materie da dare
-  if(c.slots){
-    COURSES.forEach(o=>{
-      if(o===c||isDone(o)||!o.slots) return;
-      const w=clashWeeks(c,o); if(!w.length) return;
-      if(att&&attends(o)) card.append(h('div',{class:'alert'},'Stesso orario di '+o.name+' (settimane '+weeksText(w)+').'));
-      else if(att) card.append(h('p',{class:'alert soft'},'Stesso orario di ',h('b',null,o.name),' nelle settimane '+weeksText(w)+', se dovessi frequentarla.'));
+function FundControls({ fund, full, onAdjust, c }) {
+  const [v, setV] = useState('');
+  const apply = sign => { const n = Number(String(v).replace(',', '.')); if (n > 0) { onAdjust(fund, sign * n); setV(''); } };
+  return html`
+    <div className="ctrl" style=${{ '--c': c, '--soft': fund === 'japan' ? 'var(--jp-soft)' : 'var(--cph-soft)' }}>
+      <button className="btn" type="button" onClick=${() => onAdjust(fund, -WEEKLY)}>− ${WEEKLY} €</button>
+      <button className="btn solid" type="button" disabled=${full} onClick=${() => onAdjust(fund, WEEKLY)}>+ ${WEEKLY} €</button>
+      <input className="inp" id=${'amt-' + fund} type="text" inputMode="decimal" placeholder="Altro importo" aria-label="Importo libero"
+        value=${v} onInput=${e => setV(e.target.value)} onKeyDown=${e => { if (e.key === 'Enter') apply(1); }}/>
+      <button className="btn" type="button" onClick=${() => apply(1)}>Aggiungi</button>
+      <button className="btn" type="button" onClick=${() => apply(-1)}>Togli</button>
+    </div>`;
+}
+const ScenNote = ({ sc, go }) => html`<p className="note">Scenario attivo: <b>${scenarioText(sc)}</b>. <button className="link" type="button" onClick=${() => go('timeline')}>Modifica nella Timeline</button></p>`;
+
+/* ================= Vista: Oggi ================= */
+function Home({ S, E, sim, go, deposit, setE }) {
+  const now = startOfDay(new Date());
+  const api = examApi(E);
+  const h = new Date().getHours();
+  const hello = h < 13 ? 'Buongiorno' : h < 18 ? 'Buon pomeriggio' : 'Buonasera';
+  const pj = pct(S.japan, TARGET_J), pc = pct(S.cph, TARGET_C);
+  const ns = api.nextSession(), ex = api.exams();
+  const inNs = ex.filter(c => E.plan[c.id] === ns.k);
+  const w = weekOf(now), les = w ? lessonsInWeek(E, w) : [];
+  const dueDays = daysBetween(now, MODULO_DUE), moduloDone = !!S.checks.s0;
+  const nx = nextSub(now), subDays = daysBetween(now, nx.d);
+  const subTot = SUBS.reduce((a, s) => a + s.amt, 0);
+  const allItems = CHECKLIST.flatMap(g => g.items.map(i => ({ id: i[0], t: i[1], g: g.g, c: g.c })));
+  const open = allItems.filter(i => !S.checks[i.id]);
+  const parts = [['Fondo Giappone', 60, 'var(--jp)', 48], ['Pocket abbonamenti', 10, 'var(--study)', 8], ['Conto principale, liberi', 55, '#c9cdd5', 44]];
+  const dim = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const pos = d => ((d - 1) / (dim - 1) * 100).toFixed(2) + '%';
+  return html`
+    <${Head} eyebrow=${cap(fmtDate(now, { weekday: 'long', day: 'numeric', month: 'long' }))} title=${hello + ', Mattia'}
+      lede="Studio, risparmi e i due grandi traguardi: il Giappone a luglio 2027 e Copenaghen nel 2028."/>
+
+    <div className="grid g3">
+      <div className="card">
+        <span className="label">Totale accantonato</span>
+        <p className="big num">${plain(S.japan + S.cph)}<small>€</small></p>
+        <p className="sub">Giappone e Copenaghen insieme.</p>
+        <div className="split" aria-hidden="true">
+          <i style=${{ width: (S.japan / (S.japan + S.cph || 1) * 100) + '%', background: 'var(--jp)' }}></i>
+          <i style=${{ flex: 1, background: 'var(--cph)' }}></i>
+        </div>
+      </div>
+      <div className="card" style=${{ '--c': 'var(--jp)' }}>
+        <div className="card-h"><span className="label">Giappone · luglio 2027</span><button className="link" type="button" onClick=${() => go('giappone')}>Apri</button></div>
+        <p className="mid num">${eur(S.japan)}</p>
+        <${Bar} p=${pj} c="var(--jp)"/>
+        <p className="sub">${Math.round(pj)}% di ${eur(TARGET_J)} · traguardo ${dateTxt(sim.jDate).toLowerCase()}</p>
+      </div>
+      <div className="card" style=${{ '--c': 'var(--cph)' }}>
+        <div className="card-h"><span className="label">Copenaghen · agosto 2028</span><button className="link" type="button" onClick=${() => go('copenaghen')}>Apri</button></div>
+        <p className="mid num">${eur(S.cph)}</p>
+        <${Bar} p=${pc} c="var(--cph)"/>
+        <p className="sub">${Math.round(pc)}% di ${eur(TARGET_C)} · traguardo ${sim.cDate ? dateTxt(sim.cDate).toLowerCase() : 'oltre set 2028'}</p>
+      </div>
+    </div>
+
+    <div className="grid g2">
+      <div className="card">
+        <span className="label">Prossimo versamento</span>
+        <h2>${cap(fmtDate(sim.first, { weekday: 'long', day: 'numeric', month: 'long' }))}</h2>
+        <p className="sub">${eur(WEEKLY)} ogni venerdì: prima al fondo Giappone, poi a Copenaghen.</p>
+        <div className="ctrl" style=${{ '--c': 'var(--ink)' }}>
+          <button className="btn solid" type="button" onClick=${() => deposit(WEEKLY)}>Registra ${eur(WEEKLY)}</button>
+          ${S.lastDeposit ? html`<span className="small muted">Ultimo registrato il ${fmtDate(toDate(S.lastDeposit))}</span>` : null}
+        </div>
+      </div>
+
+      <div className="card" style=${{ '--c': 'var(--study)', '--soft': 'var(--study-soft)' }}>
+        <div className="card-h"><span className="label">Studio</span><button className="link" type="button" onClick=${() => go('studio')}>Piano esami</button></div>
+        ${moduloDone ? null : html`
+          <div className="note ${dueDays <= 10 ? 'warn' : ''}">
+            <b>Modulo discipline a scelta</b> entro il ${fmtS(MODULO_DUE, true)}${dueDays >= 0 ? ' · ' + (dueDays === 0 ? 'oggi' : dueDays === 1 ? 'domani' : 'tra ' + dueDays + ' giorni') : ' · scaduto'}.
+            <label className="check" style=${{ borderTop: 0, padding: '8px 0 0' }}><input type="checkbox" checked=${false} onChange=${() => go('__check', 's0')}/><span>L'ho inviato</span></label>
+          </div>`}
+        <div className="rows">
+          <${Row} k=${'Sessione di ' + ns.label.toLowerCase() + ' ' + ns.year} v=${inNs.length + ' esami'} sub=${inNs.reduce((a, c) => a + (c.cfa || 0), 0) + ' CFA'}/>
+          <${Row} k="Esami ancora da dare" v=${String(ex.length)}/>
+        </div>
+        <div>
+          <span className="label">${w ? 'Lezioni di questa settimana' : 'Questa settimana'}</span>
+          ${les.length ? html`<div style=${{ marginTop: '8px' }}>${les.map(({ c, s }, i) => html`
+            <div className="les" key=${i}><span className="d">${WD[s.d].short}</span><span className="n">${c.name}<small>${prettyT(s.t)} · ${s.p}</small></span></div>`)}</div>`
+          : html`<p className="sub" style=${{ marginTop: '6px' }}>Nessuna lezione in calendario.</p>`}
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-h"><span className="label">Abbonamenti · ogni mese</span><span className="pill">${eur(subTot, 2)}</span></div>
+        <div className="ruler" aria-hidden="true">
+          <div className="axis"></div>
+          ${SUBS.map(s => html`<div key=${s.name} className=${'mk' + (s === nx.s ? ' next' : '')} style=${{ left: pos(Math.min(s.day, dim)) }}><span>${s.day}</span></div>`)}
+          <div className="td" style=${{ left: pos(now.getDate()) }}><span>oggi</span></div>
+        </div>
+        <div className="rows" style=${{ marginTop: '14px' }}>
+          ${SUBS.map(s => html`<div className="row" key=${s.name}>
+            <span><b style=${{ fontWeight: 600, color: 'var(--ink)' }}>${s.name}</b> <span className="small muted">· giorno ${s.day}${s === nx.s ? ', prossimo ' + (subDays === 0 ? 'oggi' : subDays === 1 ? 'domani' : 'tra ' + subDays + ' giorni') : ''}</span></span>
+            <b>−${eur(s.amt, 2)}</b></div>`)}
+        </div>
+        <p className="small muted">10 € a settimana valgono in media ${eur(10 * 52 / 12, 2)} al mese: coprono gli abbonamenti con circa ${eur(10 * 52 / 12 - subTot, 2)} di margine.</p>
+      </div>
+
+      <div className="card">
+        <div className="card-h"><span className="label">Ogni settimana · entrata</span><span className="pill">+125 €</span></div>
+        <div className="split" aria-hidden="true">${parts.map(p => html`<i key=${p[0]} style=${{ width: p[3] + '%', background: p[2] }}></i>`)}</div>
+        <div className="rows">
+          ${parts.map(p => html`<div className="row" key=${p[0]}><span><span className="dot" style=${{ '--c': p[2], display: 'inline-block', marginRight: '8px' }}></span>${p[0]} · ${p[3]}%</span><b>${eur(p[1])}</b></div>`)}
+        </div>
+        <div>
+          <div className="card-h"><span className="label">Da fare · ${allItems.length - open.length} di ${allItems.length}</span><button className="link" type="button" onClick=${() => go('piano')}>Tutto il piano</button></div>
+          <div style=${{ marginTop: '6px' }}>
+            ${open.slice(0, 3).map(i => html`<label className="check" key=${i.id} style=${{ '--c': i.c }}>
+              <input type="checkbox" checked=${false} onChange=${() => go('__check', i.id)}/><span>${i.t} <span className="small muted">· ${i.g}</span></span></label>`)}
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ================= Vista: Studio (piano esami) ================= */
+function CourseCard({ c, E, setE }) {
+  const api = examApi(E), sp = span(c), att = api.attends(c), ear = api.earliest(c);
+  const setPlan = k => setE(e => { const plan = { ...e.plan }; if (plan[c.id] === k) delete plan[c.id]; else plan[c.id] = k; return { ...e, plan }; });
+  const toggleAttend = () => setE(e => {
+    const attend = { ...e.attend, [c.id]: !att }, plan = { ...e.plan };
+    const ne = { ...e, attend };
+    const cur = SESS.find(s => s.k === plan[c.id]);
+    if (cur && !examApi(ne).eligible(c, cur)) delete plan[c.id];
+    return { ...ne, plan };
+  });
+  const pass = () => setE(e => { const plan = { ...e.plan }; delete plan[c.id]; return { ...e, plan, passed: { ...e.passed, [c.id]: true } }; });
+  const clashes = [];
+  if (c.slots && att) COURSES.forEach(o => {
+    if (o === c || api.isDone(o) || !o.slots) return;
+    const w = clashWeeks(c, o); if (!w.length) return;
+    clashes.push({ o, w, both: api.attends(o) });
+  });
+  const opts = c.thesis ? DSESS : SESS;
+  return html`
+    <article className="card course" id=${'c-' + c.id}>
+      <div>
+        ${c.y === 'S' ? html`<span className="pill c" style=${{ '--c': 'var(--study)', '--soft': 'var(--study-soft)', marginBottom: '8px' }}>A scelta · ${c.from}</span>` : null}
+        <div className="card-h" style=${{ marginTop: c.y === 'S' ? '8px' : 0 }}><h3>${c.name}</h3><span className="pill">${c.cfa ? c.cfa + ' CFA' : 'CFA da definire'}</span></div>
+        ${c.prof ? html`<p className="sub" style=${{ marginTop: '2px' }}>Prof. ${c.prof}</p>` : null}
+      </div>
+      <dl className="facts">
+        ${c.thesis ? html`<dt>Sessioni</dt><dd>Diploma: giugno 2027, settembre 2027, dicembre 2027, febbraio 2028</dd>`
+        : c.sem2 ? html`<dt>Lezioni</dt><dd>2° semestre, palinsesto non ancora uscito</dd><dt>Esame</dt><dd><strong>${att ? 'da giugno 2027' : 'da dicembre 2026'}</strong></dd>`
+        : html`
+          ${att ? html`<dt>Inizio</dt><dd><strong>${fmtS(sp.first, true)}</strong></dd><dt>Fine</dt><dd><strong>${fmtS(sp.last, true)}</strong></dd>`
+                : html`<dt>Lezioni</dt><dd>${fmtS(sp.first)} → ${fmtS(sp.last, true)} (frequenza già fatta)</dd>`}
+          <dt>Quando</dt><dd>${[...new Set(c.slots.map(s => WD[s.d].label))].join(' / ')}, ${[...new Set(c.slots.map(s => prettyT(s.t)))].join(' / ')}</dd>
+          <dt>Esame</dt><dd><strong>${ear ? 'da ' + ear.label.toLowerCase() + ' ' + ear.year : '—'}</strong></dd>`}
+      </dl>
+      ${clashes.map(x => x.both
+        ? html`<p className="note warn" key=${x.o.id}>Stesso orario di <b>${x.o.name}</b> nelle settimane ${weeksText(x.w)}.</p>`
+        : html`<p className="small muted" key=${x.o.id}>Stesso orario di ${x.o.name} nelle settimane ${weeksText(x.w)}, se dovessi frequentarla.</p>`)}
+      <div>
+        <span className="label">${c.thesis ? 'Sessione di diploma' : "Sessione d'esame"}</span>
+        <div className="sess" role="group" style=${{ marginTop: '8px' }}>
+          ${opts.map(s => { const ok = c.thesis || api.eligible(c, s); return html`
+            <button key=${s.k} type="button" aria-pressed=${String(E.plan[c.id] === s.k)} disabled=${!ok}
+              title=${ok ? s.label + ' ' + s.year : 'Le lezioni non sono ancora finite'} onClick=${() => setPlan(s.k)}>${s.short}<small>${s.year}</small></button>`; })}
+        </div>
+      </div>
+      <div className="chips">
+        ${c.thesis ? null : html`<button type="button" className=${'chip' + (att ? ' on' : '')} aria-pressed=${String(att)} onClick=${toggleAttend}>${att ? "Frequento quest'anno" : 'Frequenza già fatta'}</button>`}
+        <button type="button" className="chip" onClick=${pass}>Segna superato</button>
+      </div>
+      ${c.slots ? html`<details><summary>Orario completo</summary><ul>${c.slots.map((s, i) => html`<li key=${i}>Settimane ${weeksText(s.w)} · ${WD[s.d].label} ${prettyT(s.t)} · ${s.p}</li>`)}</ul></details>` : null}
+    </article>`;
+}
+
+function Studio({ E, setE }) {
+  const api = examApi(E), ex = api.exams(), tab = E.tab || 'materie';
+  const planned = ex.filter(c => SESS.some(s => s.k === E.plan[c.id]));
+  const cfa = ex.reduce((a, c) => a + (c.cfa || 0), 0), unknown = ex.some(c => !c.cfa);
+  const ns = api.nextSession();
+  const setTab = t => setE(e => ({ ...e, tab: t }));
+  const [armed, setArmed] = useState(false);
+  useEffect(() => { if (!armed) return; const t = setTimeout(() => setArmed(false), 3500); return () => clearTimeout(t); }, [armed]);
+
+  let body;
+  if (tab === 'materie') {
+    body = YEARS.map(y => {
+      const all = COURSES.filter(c => c.y === y.k), todo = all.filter(c => !api.isDone(c)), done = all.filter(api.isDone);
+      return html`<section key=${y.k} style=${{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div className="sec-title"><h2>${y.label}</h2><span>${y.k === 'S' ? '14 CFA scelti · ne servono 10' : done.length + ' di ' + all.length + ' superati'}</span></div>
+        ${todo.length ? html`<div className="grid g2">${todo.map(c => html`<${CourseCard} key=${c.id} c=${c} E=${E} setE=${setE}/>`)}</div>` : null}
+        ${done.length ? html`<div className="card"><span className="label">Superati</span><div className="done-list">${done.map(c => html`
+          <div key=${c.id}><span>${c.name}</span>${c.done ? html`<span className="pill ok">Superato</span>`
+            : html`<button className="link" type="button" onClick=${() => setE(e => { const passed = { ...e.passed }; delete passed[c.id]; return { ...e, passed }; })}>Annulla</button>`}</div>`)}</div></div>` : null}
+      </section>`;
     });
+  } else if (tab === 'sessioni') {
+    const free = ex.filter(c => !SESS.some(s => s.k === E.plan[c.id]));
+    const th = byId('355'), d = DSESS.find(x => x.k === E.plan['355']);
+    body = html`
+      <div className="grid g2">
+        ${SESS.map(s => {
+          const list = ex.filter(c => E.plan[c.id] === s.k), avail = ex.filter(c => E.plan[c.id] !== s.k && api.eligible(c, s));
+          return html`<div className="card" key=${s.k}>
+            <div className="card-h"><h2>${s.label} ${s.year}</h2><span className="pill">${list.length} esami · ${list.reduce((a, c) => a + (c.cfa || 0), 0)} CFA${list.some(c => !c.cfa) ? '+' : ''}</span></div>
+            ${s.k === 'feb' ? html`<p className="small muted">Non c'è una sessione a gennaio: dopo dicembre la prossima è febbraio.</p>` : null}
+            <div>${list.length ? list.map(c => html`<div className="srow" key=${c.id}>
+              <div><strong>${c.name}</strong><span className="s">${c.cfa ? c.cfa + ' CFA' : 'CFA da definire'}${c.prof ? ' · ' + c.prof : ''}</span></div>
+              <button className="chip" type="button" onClick=${() => setE(e => { const plan = { ...e.plan }; delete plan[c.id]; return { ...e, plan }; })}>Togli</button></div>`)
+              : html`<p className="sub">Nessun esame in questa sessione.</p>`}</div>
+            ${avail.length ? html`<select className="inp" id=${'add-' + s.k} value="" aria-label=${'Aggiungi esame a ' + s.label}
+              onChange=${e => { const v = e.target.value; if (v) setE(x => ({ ...x, plan: { ...x.plan, [v]: s.k } })); }}>
+              <option value="">Aggiungi un esame…</option>
+              ${avail.map(c => html`<option key=${c.id} value=${c.id}>${c.name}${E.plan[c.id] ? ' (ora in ' + SESS.find(x => x.k === E.plan[c.id]).short + ')' : ''}</option>`)}
+            </select>` : null}
+          </div>`;
+        })}
+        <div className="card">
+          <div className="card-h"><h2>Da programmare</h2><span className="pill">${free.length} esami</span></div>
+          <div>${free.length ? free.map(c => { const e1 = api.earliest(c); return html`<div className="srow" key=${c.id}>
+            <div><strong>${c.name}</strong><span className="s">${e1 ? 'Primo appello utile: ' + e1.label.toLowerCase() + ' ' + e1.year : ''}</span></div>
+            ${e1 ? html`<button className="chip" type="button" onClick=${() => setE(x => ({ ...x, plan: { ...x.plan, [c.id]: e1.k } }))}>Metti a ${e1.short}</button>` : null}</div>`; })
+            : html`<p className="sub">Tutti gli esami hanno una sessione.</p>`}</div>
+        </div>
+        ${api.isDone(th) ? null : html`<div className="card">
+          <div className="card-h"><h2>Diploma</h2><span className="pill">8 CFA</span></div>
+          <div className="srow"><div><strong>Elaborato di sintesi finale</strong><span className="s">${d ? 'Sessione di ' + d.label.toLowerCase() + ' ' + d.year : 'Sessione non scelta'}</span></div>
+            <button className="chip" type="button" onClick=${() => setTab('materie')}>Cambia</button></div>
+        </div>`}
+      </div>
+      <p className="small muted">Sessioni dal Manifesto degli studi 2026/27. Le date dei singoli appelli escono sul sito qualche settimana prima di ogni sessione. Un esame si può dare solo dopo la fine delle lezioni.</p>
+      <div><button type="button" className=${'chip' + (armed ? ' arm' : '')} onClick=${() => { if (!armed) { setArmed(true); return; } setArmed(false); setE(e => ({ ...EXAM_DEFAULTS(), tab: e.tab })); }}>${armed ? 'Tocca di nuovo per confermare' : 'Ripristina la proposta iniziale'}</button></div>`;
+  } else {
+    const today = new Date(), att = COURSES.filter(c => !api.isDone(c) && c.slots && api.attends(c));
+    const sl = span(byId('LAY')), se = span(byId('ECO'));
+    body = html`
+      <div className="grid g2">
+        <div className="card">
+          <h2>Scadenze del semestre</h2>
+          <div className="rows">
+            <${Row} k="Invio modulo discipline a scelta" v=${fmtS(MODULO_DUE, true)}/>
+            <${Row} k="Prima lezione di Layout" v=${fmtS(sl.first, true)}/>
+            <${Row} k="Prima lezione di Ecodesign" v=${fmtS(se.first, true)}/>
+            <${Row} k="Sessione d'esame invernale" v="dicembre 2026"/>
+            <${Row} k="Fine lezioni del 1° semestre" v="3 feb 2027"/>
+            <${Row} k="Sessione d'esame primaverile" v="febbraio 2027"/>
+          </div>
+          <p className="small muted">Il modulo va inviato dalla mail istituzionale a segreteria@abacatania.it, entro 7 giorni dall'inizio delle lezioni.</p>
+        </div>
+        <div className="card">
+          <div className="card-h"><h2>Settimana per settimana</h2><span className="pill">${att.length} corsi</span></div>
+          <p className="small muted" style=${{ marginTop: '-8px' }}>Solo le materie che frequenti quest'anno.</p>
+          <div>
+            ${Object.keys(WEEKS).map(Number).map(w => {
+              const mon = toDate(WEEKS[w][0]), now = today >= mon && today < addDays(mon, 7);
+              const rows = lessonsInWeek(E, w), clash = new Set();
+              rows.forEach(a => rows.forEach(b => { if (a.c !== b.c && clashWeeks({ slots: [a.s] }, { slots: [b.s] }).includes(w)) { clash.add(a.c.id); clash.add(b.c.id); } }));
+              return html`<div key=${w}>
+                ${w === 11 ? html`<p className="small muted" style=${{ padding: '10px 0', fontStyle: 'italic' }}>Pausa natalizia: 5 dicembre – 6 gennaio</p>` : null}
+                <div className=${'week' + (now ? ' now' : '')}>
+                  <div className="week-h"><b>Settimana ${w}</b><span>${now ? 'questa settimana · ' : ''}${WEEKS[w][1]}</span></div>
+                  ${rows.length ? rows.map(({ c, s }, i) => html`<div key=${i} className=${'les' + (clash.has(c.id) ? ' clash' : '')}>
+                    <span className="d">${WD[s.d].short}</span><span className="n">${c.name}${clash.has(c.id) ? ' · sovrapposizione' : ''}<small>${prettyT(s.t)} · ${s.p}</small></span></div>`)
+                  : html`<p className="small muted">Nessuna lezione</p>`}
+                </div></div>`;
+            })}
+          </div>
+        </div>
+      </div>
+      <p className="small muted">Dati dal palinsesto del 1° semestre 2026/27, versione del 6 ottobre 2026. Il palinsesto del 2° semestre non è ancora uscito.</p>`;
   }
 
-  // scelta sessione
-  const opts=c.thesis?DSESS:SESS;
-  const seg=h('div',{class:'seg',role:'group','aria-label':'Sessione'});
-  opts.forEach(s=>{
-    const ok=c.thesis||eligible(c,s);
-    seg.append(h('button',{type:'button','aria-pressed':String(state.plan[c.id]===s.k),disabled:!ok,
-      title:ok?s.label+' '+s.year:'Le lezioni non sono ancora finite',onclick:()=>setPlan(c.id,s.k)},
-      s.short,h('small',null,s.year)));
-  });
-  card.append(h('div',null,h('p',{class:'pick-l'},c.thesis?'Sessione di diploma':'Sessione d’esame'),seg));
+  return html`
+    <${Head} eyebrow="Accademia di Belle Arti di Catania · DAPL06 · 3° anno" title="Studio" c="var(--study)"
+      lede="Le materie che ti restano, quando iniziano e finiscono le lezioni e in quale sessione dare ogni esame."/>
+    <div className="grid g3">
+      <div className="card"><span className="label">Esami da dare</span><p className="big num">${ex.length}</p><p className="sub">più la tesi</p></div>
+      <div className="card"><span className="label">Programmati</span><p className="big num">${planned.length}<small>/ ${ex.length}</small></p><${Bar} p=${pct(planned.length, ex.length || 1)} c="var(--study)"/></div>
+      <div className="card"><span className="label">CFA da dare</span><p className="big num">${cfa}${unknown ? '+' : ''}</p><p className="sub">${unknown ? 'Mancano i CFA dei corsi del 2° semestre' : ''}</p></div>
+    </div>
+    <div className="strip">
+      ${SESS.map(s => { const list = ex.filter(c => E.plan[c.id] === s.k); return html`
+        <button key=${s.k} type="button" className=${s.k === ns.k ? 'next' : ''} onClick=${() => setTab('sessioni')}>
+          <span className="m">${s.short} ${s.year.slice(2)}</span><span className="n num">${list.length}</span><span className="c">${list.reduce((a, c) => a + (c.cfa || 0), 0)} CFA</span></button>`; })}
+    </div>
+    <div className="seg" role="group" aria-label="Sezioni dello studio">
+      ${[['materie', 'Materie'], ['sessioni', 'Sessioni'], ['lezioni', 'Lezioni']].map(t => html`
+        <button key=${t[0]} type="button" aria-pressed=${String(tab === t[0])} onClick=${() => setTab(t[0])}>${t[1]}</button>`)}
+    </div>
+    ${body}`;
+}
 
-  const acts=h('div',{class:'actions'});
-  if(!c.thesis){
-    acts.append(h('button',{type:'button',class:'chip'+(att?' on':''),'aria-pressed':String(att),onclick:()=>{
-      state.attend[c.id]=!att;
-      if(state.plan[c.id]&&!eligible(c,SESS.find(s=>s.k===state.plan[c.id]))) delete state.plan[c.id];
-      save(); render();
-    }},att?'Frequento quest’anno':'Frequenza già fatta'));
+/* ================= Vista: Giappone ================= */
+function Japan({ S, setS, sim, adjust, go }) {
+  const j = S.japan, p = pct(j, TARGET_J), missing = TARGET_J - j;
+  const fixedTot = FIXED.reduce((a, x) => a + x.v, 0), extraTot = EXTRAS.reduce((a, x) => a + S.extras[x.id], 0);
+  const total = fixedTot + extraTot, margin = TARGET_J - total;
+  const weeks = sim.jWeeks !== null ? sim.jWeeks : Math.ceil(missing / WEEKLY);
+  return html`
+    <${Head} eyebrow="Luglio 2027 · in due" title="Giappone" c="var(--jp)"
+      lede="19-20 giorni tra Tokyo, Kyoto, Osaka e Okinawa. Tutte le cifre sono la tua quota."/>
+    <div className="grid g2">
+      <div className="card" style=${{ '--c': 'var(--jp)' }}>
+        <div className="card-h"><span className="label">Fondo Giappone</span><span className="pill c" style=${{ '--soft': 'var(--jp-soft)' }}>${Math.round(p)}%</span></div>
+        <p className="big num">${plain(j)}<small>€</small></p>
+        <${Bar} p=${p} c="var(--jp)"/>
+        <div className="rows">
+          <${Row} k="Obiettivo" v=${eur(TARGET_J)}/>
+          <${Row} k="Mancano" v=${eur(missing)}/>
+          <${Row} k="Settimane" v=${String(weeks)} sub=${sim.jWeeks !== null && (S.scen.b1 || S.scen.b2) ? 'con la borsa' : 'a ' + WEEKLY + ' € a settimana'}/>
+          <${Row} k="Traguardo" v=${dateTxt(sim.jDate)}/>
+        </div>
+        <${FundControls} fund="japan" full=${j >= TARGET_J} onAdjust=${adjust} c="var(--jp)"/>
+        <${ScenNote} sc=${S.scen} go=${go}/>
+      </div>
+      <div className="card">
+        <span className="label">Quadro economico previsto</span>
+        <div className="rc">
+          ${FIXED.map(x => html`<div key=${x.k}><div className="ln"><span>${x.k}</span><i></i><span className="num">~${plain(x.v)} €</span></div><p className="nt">${x.n}</p></div>`)}
+          <div className="ln sum"><span>Subtotale dell'app</span><i></i><span className="num">${plain(fixedTot)} €</span></div>
+          <p className="label" style=${{ margin: '18px 0 4px' }}>Voci mancanti · stime da verificare</p>
+          ${EXTRAS.map(x => html`<label className="ln" key=${x.id}><span>${x.k}</span><i></i>
+            <input type="number" min="0" step="5" inputMode="numeric" id=${'x-' + x.id} value=${S.extras[x.id]} aria-label=${x.k + ' in euro'}
+              onChange=${e => { const v = Math.max(0, Number(e.target.value) || 0); setS(s => ({ ...s, extras: { ...s.extras, [x.id]: v } })); }}/><span>€</span></label>`)}
+          <div className="ln sum"><span>Costo totale previsto</span><i></i><span className="num">${plain(total)} €</span></div>
+          <div className="ln"><span>Fondo</span><i></i><span className="num">${plain(TARGET_J)} €</span></div>
+          <div className=${'ln sum' + (margin < 0 ? ' neg' : '')}><span>Margine reale</span><i></i><span className="num">${plain(margin)} €</span></div>
+        </div>
+        <p className="note">L'app indicava un surplus di 700–1.000 €. Con le voci mancanti il margine reale è circa <b>${eur(margin)}</b>: usalo come cuscinetto prima che come budget per lo shopping.</p>
+      </div>
+      <div className="card">
+        <span className="label">Itinerario</span>
+        <div className="route">${ROUTE.map(r => html`<div className="stop" key=${r.c}><div className="rail"><b></b></div><div><h3>${r.c}<span>${r.n}</span></h3><p>${r.d}</p></div></div>`)}</div>
+      </div>
+      <div className="card">
+        <span className="label">Voli · tracker attivi</span>
+        <div className="rows">
+          <${Row} k="Soglia per comprare il volo" v="750 €"/>
+          <${Row} k="Voli e alloggi insieme" v="~2.000 €"/>
+        </div>
+        <div className="rows">
+          <div className="row"><span>Tracker A: multi-tratta Roma/Milano, Tokyo e Osaka</span></div>
+          <div className="row"><span>Tracker B: andata e ritorno Roma/Milano, Tokyo</span></div>
+          <div className="row"><span>Filtri: massimo 2 scali, massimo 26 ore, bagaglio da 23 kg incluso, PNR unico</span></div>
+        </div>
+      </div>
+      <div className="card span2">
+        <span className="label">Andamento previsto</span>
+        <${Chart} sim=${sim} j=${true} t1=${TRIP_END}/>
+      </div>
+    </div>`;
+}
+
+/* ================= Vista: Copenaghen ================= */
+function Cph({ S, sim, adjust, go }) {
+  const c = S.cph, p = pct(c, TARGET_C), missing = Math.max(0, TARGET_C - c);
+  return html`
+    <${Head} eyebrow="Agosto – settembre 2028" title="Copenaghen" c="var(--cph)"
+      lede="Il fondo per il trasferimento: Master, alloggio, cauzione e primi mesi."/>
+    <div className="grid g2">
+      <div className="card" style=${{ '--c': 'var(--cph)' }}>
+        <div className="card-h"><span className="label">Fondo Copenaghen</span><span className="pill c" style=${{ '--soft': 'var(--cph-soft)' }}>${Math.round(p)}%</span></div>
+        <p className="big num">${plain(c)}<small>€</small></p>
+        <${Bar} p=${p} c="var(--cph)"/>
+        <div className="rows">
+          <${Row} k="Obiettivo" v=${eur(TARGET_C)}/>
+          <${Row} k="Mancano" v=${missing ? eur(missing) : 'Nulla'}/>
+          <${Row} k="Traguardo" v=${sim.cDate ? (sim.cDate <= startOfDay(new Date()) ? 'Raggiunto' : fmtDate(sim.cDate, { month: 'long', year: 'numeric' })) : 'Oltre settembre 2028'}/>
+          <${Row} k="Luglio 2028" v=${eur(sim.at(CPH_JUL).c)} sub="previsto"/>
+          <${Row} k="Settembre 2028" v=${eur(sim.at(CPH_SEP).c)} sub="previsto"/>
+        </div>
+        <${FundControls} fund="cph" full=${false} onAdjust=${adjust} c="var(--cph)"/>
+        <${ScenNote} sc=${S.scen} go=${go}/>
+      </div>
+      <div className="card">
+        <span className="label">Le due fasi</span>
+        <div>
+          <h2>Accumulo, da luglio 2027</h2>
+          <p className="sub" style=${{ marginTop: '4px' }}>Quando il Giappone è chiuso, i ${WEEKLY} € del venerdì vanno a Copenaghen. Eventuali extra (borsa, freelance) sono margine, non una parte necessaria del piano.</p>
+        </div>
+        <div style=${{ borderTop: '1px solid var(--line2)', paddingTop: '14px' }}>
+          <h2>Indipendenza, da settembre 2028</h2>
+          <p className="sub" style=${{ marginTop: '4px' }}>Una volta residente e immatricolato, un part-time di 10–12 ore a settimana in uno studio danese dà accesso allo Statens Uddannelsesstøtte, circa 900 € al mese. Cifra e requisiti vengono dalla tua nota: da verificare su su.dk.</p>
+        </div>
+      </div>
+      <div className="card tint" style=${{ '--soft': 'var(--cph-soft)' }}>
+        <span className="label" style=${{ color: 'var(--cph)' }}>Master · via maestra</span>
+        <h2>Royal Danish Academy</h2>
+        <p className="sub">Graphic Communication Design: direzione artistica, wayfinding e comunicazione visiva pura. Conta quasi solo la forza metodologica del portfolio.</p>
+      </div>
+      <div className="card">
+        <span className="label">Master · alternativa</span>
+        <h2>IT University of Copenhagen</h2>
+        <p className="sub">L'opzione più solida se il profilo si sposta verso Digital e Interaction Design.</p>
+      </div>
+      <div className="card span2">
+        <span className="label">Mercato danese</span>
+        <p className="sub" style=${{ maxWidth: '72ch' }}>Il design scandinavo è orizzontale e premia l'autonomia. Il punto di forza è gestire un progetto dalla A alla Z, dal concept alla stampa: l'ingresso più naturale è in tech, startup o ruoli di UI/UX, dove l'inglese è la lingua di lavoro.</p>
+      </div>
+      <div className="card span2">
+        <span className="label">Andamento previsto</span>
+        <${Chart} sim=${sim} c=${true}/>
+      </div>
+    </div>`;
+}
+
+/* ================= Vista: Timeline ================= */
+function Timeline({ S, setS, sim }) {
+  const sc = S.scen;
+  const setSc = patch => setS(s => ({ ...s, scen: { ...s.scen, ...patch } }));
+  const alt = [
+    ['Base', { b1: false, b2: false, iphone: 0 }],
+    ['Con borsa, prima rata', { b1: true, b1m: sc.b1m, b2: false, iphone: 0 }],
+    ['Con iPhone 18 Pro 256 GB', { b1: false, b2: false, iphone: 1489 }],
+    ['Borsa e iPhone', { b1: true, b1m: sc.b1m, b2: false, iphone: 1489 }]
+  ].map(a => ({ n: a[0], r: simulate(a[1], { japan: S.japan, cph: S.cph }, S.lastDeposit) }));
+  const ev = [], at1 = sim.at(new Date(2027, 2, 1)).j, today = startOfDay(new Date());
+  if (sc.b1) ev.push({ sd: monthDate(sc.b1m), when: cap(fmtDate(monthDate(sc.b1m), { month: 'long', year: 'numeric' })), t: 'Borsa di studio, prima rata', n: '+' + eur(BORSA) + ' al fondo Giappone.', c: 'var(--study)' });
+  if (sc.b2) ev.push({ sd: monthDate(sc.b2m), when: cap(fmtDate(monthDate(sc.b2m), { month: 'long', year: 'numeric' })), t: 'Borsa di studio, seconda rata', n: '+' + eur(BORSA) + ". La data è un'ipotesi.", c: 'var(--study)' });
+  if (sc.iphone) ev.push({ sd: today, when: 'Subito', t: 'Acquisto iPhone', n: '−' + eur(sc.iphone) + ' dal fondo Copenaghen.' });
+  ev.push({ sd: MODULO_DUE, when: fmtS(MODULO_DUE, true), t: 'Modulo discipline a scelta', n: 'Layout e Ecodesign, da inviare alla segreteria.', key: true, c: 'var(--study)' });
+  ev.push({ sd: new Date(2026, 11, 1), when: 'Dicembre 2026', t: "Sessione d'esame invernale", n: 'Gli esami programmati nella sezione Studio.', c: 'var(--study)' });
+  ev.push({ sd: new Date(2027, 1, 15), when: 'Febbraio – marzo 2027', t: 'Prenota voli e alloggi', n: 'Circa 2.000 €. Fondo Giappone previsto a inizio marzo: ' + eur(at1) + (at1 >= 2000 ? ', quindi coperti.' : ', non bastano ancora.') });
+  ev.push({ sd: new Date(2027, 1, 4), when: 'Febbraio 2027', t: "Sessione d'esame primaverile", n: 'Layout, Ecodesign e le altre materie del 1° semestre.', c: 'var(--study)' });
+  ev.push({ sd: new Date(2027, 5, 1), when: 'Giugno 2027', t: 'Sessione estiva e prima sessione di diploma', n: 'Le materie del 2° semestre e, se pronta, la tesi.', c: 'var(--study)' });
+  ev.push({ sd: new Date(2027, 6, 1), when: 'Luglio 2027', t: 'Viaggio in Giappone', n: 'Tokyo, Kyoto, Osaka, Okinawa · 19 notti in due.', key: true, c: 'var(--jp)' });
+  if (sim.jDate) {
+    const late = sim.jDate >= new Date(2027, 6, 1);
+    ev.push({ sd: sim.jDate, when: fmtDate(sim.jDate), t: 'Fondo Giappone completo', n: eur(TARGET_J) + (late ? '. Se parti a inizio luglio il fondo non è ancora pieno: voli e alloggi sono già pagati, cibo e treni li copri con gli ultimi versamenti.' : '.'), key: true, c: 'var(--jp)' });
+    ev.push({ sd: addDays(sim.jDate, 7), when: 'Dal ' + fmtDate(addDays(sim.jDate, 7)), t: 'I ' + WEEKLY + ' € settimanali vanno a Copenaghen', n: 'Il Giappone è chiuso: la fase di accumulo parte da qui.' });
   }
-  acts.append(h('button',{type:'button',class:'chip',onclick:()=>{state.passed[c.id]=true; delete state.plan[c.id]; save(); render();}},'Segna superato'));
-  card.append(acts);
-
-  if(c.slots){
-    card.append(h('details',null,h('summary',null,'Orario completo'),
-      h('ul',null,c.slots.map(s=>h('li',null,'Sett. '+weeksText(s.w)+' · '+DAYS[s.d].label+' '+pretty(s.t)+' · '+s.p)))));
-  }
-  return card;
+  ev.push({ sd: new Date(2027, 9, 1), when: 'Autunno – inverno 2027', t: 'IELTS Academic', n: 'Test al computer, target minimo 6.5. In parallelo: selezione e impaginazione in inglese dei casi studio (Cantalupo, Museo Tattile).' });
+  ev.push({ sd: new Date(2028, 0, 1), when: 'Gennaio – 1 marzo 2028', t: 'Candidatura al Master', n: 'Apertura e chiusura inderogabile del portale (DANS, come da tua nota). Fondo Copenaghen previsto al 1 marzo: ' + eur(sim.at(new Date(2028, 2, 1)).c) + '.', key: true, c: 'var(--cph)' });
+  if (sim.cDate) ev.push({ sd: sim.cDate, when: fmtDate(sim.cDate), t: 'Fondo Copenaghen a ' + eur(TARGET_C), n: sim.cDate <= today ? 'Già raggiunto.' : 'Obiettivo di sicurezza chiuso.', key: true, c: 'var(--cph)' });
+  ev.push({ sd: new Date(2028, 7, 1), when: 'Agosto – settembre 2028', t: 'Trasferimento a Copenaghen', n: 'Kollegium da prenotare con largo anticipo su s.dk, poi immatricolazione. Fondo previsto a settembre: ' + eur(sim.at(CPH_SEP).c) + '.', key: true, c: 'var(--cph)' });
+  ev.sort((a, b) => a.sd - b.sd);
+  return html`
+    <${Head} eyebrow="Soldi, studio e traguardi" title="Timeline"
+      lede=${"Cosa succede se arriva la borsa o se compri l'iPhone. Ogni entrata va prima al Giappone fino a " + eur(TARGET_J) + ', il resto a Copenaghen.'}/>
+    <div className="grid g2">
+      <div className="card">
+        <span className="label">Scenario</span>
+        <div>
+          <div className="srow"><label className="check" style=${{ border: 0, padding: 0, '--c': 'var(--study)' }}>
+            <input type="checkbox" checked=${sc.b1} onChange=${e => setSc({ b1: e.target.checked })}/><span>Borsa di studio, prima rata · ${eur(BORSA)}</span></label>
+            <input className="inp" type="month" value=${sc.b1m} aria-label="Mese della prima rata" style=${{ maxWidth: '11rem' }} onChange=${e => { if (/^\d{4}-\d{2}$/.test(e.target.value)) setSc({ b1m: e.target.value }); }}/></div>
+          <div className="srow"><label className="check" style=${{ border: 0, padding: 0, '--c': 'var(--study)' }}>
+            <input type="checkbox" checked=${sc.b2} onChange=${e => setSc({ b2: e.target.checked })}/><span>Borsa di studio, seconda rata · ${eur(BORSA)}<br/><span className="small muted">data incerta: scegli tu il mese</span></span></label>
+            <input className="inp" type="month" value=${sc.b2m} aria-label="Mese della seconda rata" style=${{ maxWidth: '11rem' }} onChange=${e => { if (/^\d{4}-\d{2}$/.test(e.target.value)) setSc({ b2m: e.target.value }); }}/></div>
+          <div className="srow" style=${{ flexWrap: 'wrap' }}><label htmlFor="iph">iPhone dal fondo Copenaghen</label>
+            <select id="iph" className="inp" value=${sc.iphone} onChange=${e => setSc({ iphone: Number(e.target.value) || 0 })}>
+              ${IPHONES.map(p => html`<option key=${p.v} value=${p.v}>${p.l}</option>`)}
+            </select></div>
+        </div>
+      </div>
+      <div className="card">
+        <span className="label">Confronto · quattro scenari</span>
+        <div className="tbl-wrap"><table className="tbl">
+          <thead><tr><th>Scenario</th><th>Giappone completo</th><th>Copenaghen a 5.000 €</th><th>Luglio 2028</th></tr></thead>
+          <tbody>${alt.map(a => html`<tr key=${a.n}><td>${a.n}</td><td>${a.r.jDate ? fmtDate(a.r.jDate) : 'dopo il viaggio'}</td><td>${a.r.cDate ? fmtDate(a.r.cDate, { month: 'short', year: 'numeric' }) : 'oltre set 2028'}</td><td>${eur(a.r.at(CPH_JUL).c)}</td></tr>`)}</tbody>
+        </table></div>
+      </div>
+      <div className="card span2">
+        <span className="label">Timeline dei fondi</span>
+        <${Chart} sim=${sim} j=${true} c=${true}/>
+      </div>
+      <div className="card span2">
+        <span className="label">Tappe · ogni venerdì versamento da ${eur(WEEKLY)}</span>
+        <div>${ev.map((e, i) => html`<div key=${i} className=${'ev' + (e.key ? ' key' : '')} style=${{ '--c': e.c || 'var(--jp)' }}>
+          <p className="when">${e.when}</p><div><h3>${e.t}</h3><p>${e.n}</p></div></div>`)}</div>
+      </div>
+    </div>`;
 }
-function renderMaterie(){
-  const out=[];
-  YEARS.forEach(y=>{
-    const all=COURSES.filter(c=>c.y===y.k);
-    const todo=all.filter(c=>!isDone(c)), done=all.filter(isDone);
-    const sec=h('section',{class:'sec',id:'y-'+y.k},
-      h('div',{class:'sec-h'},h('h2',null,y.label),h('span',{class:'meta'},y.k==='S'?'14 CFA · ne servono 10':done.length+'/'+all.length+' superati')));
-    const list=h('div',{class:'list'}); todo.forEach(c=>list.append(courseCard(c)));
-    if(todo.length) sec.append(list);
-    if(done.length){
-      sec.append(h('div',{class:'done'},done.map(c=>h('div',{class:'done-row'},
-        h('span',null,c.name),
-        c.done?h('span',{class:'ok'},'superato'):h('button',{type:'button',onclick:()=>{delete state.passed[c.id]; save(); render();}},'superato · annulla')))));
-    }
-    out.push(sec);
+
+/* ================= Vista: Piano ================= */
+function Plan({ S, setS, resetAll }) {
+  const total = CHECKLIST.reduce((a, g) => a + g.items.length, 0), done = CHECKLIST.reduce((a, g) => a + g.items.filter(i => S.checks[i[0]]).length, 0);
+  const [armed, setArmed] = useState(false);
+  useEffect(() => { if (!armed) return; const t = setTimeout(() => setArmed(false), 4000); return () => clearTimeout(t); }, [armed]);
+  const toggle = id => setS(s => { const checks = { ...s.checks }; if (checks[id]) delete checks[id]; else checks[id] = true; return { ...s, checks }; });
+  const phases = [
+    ['Fino a luglio 2027', "Focus sul Giappone. Chiudere gli esami in Accademia e archiviare con metodo bozze, wireframe ed esecutivi dei progetti dello studio: sono l'ossatura del portfolio.", 'var(--jp)'],
+    ['Autunno 2027 – marzo 2028', 'IELTS Academic, selezione spietata dei casi studio in inglese, candidatura entro il 1 marzo 2028.', 'var(--study)'],
+    ['Agosto – settembre 2028', 'Trasferimento a Copenaghen, alloggio in Kollegium, immatricolazione al Master.', 'var(--cph)']
+  ];
+  return html`
+    <${Head} eyebrow="Da fare" title="Piano" lede="Le tre fasi fino a Copenaghen e la checklist di tutto quello che serve."/>
+    <div className="grid g3">
+      <div className="card"><span className="label">Studio</span><h2>Design della comunicazione visiva</h2><p className="sub">Accademia di Belle Arti, Catania</p></div>
+      <div className="card"><span className="label">Lavoro</span><h2>Studio grafico</h2><p className="sub">Circa 600 € al mese</p></div>
+      <div className="card"><span className="label">Entrata fissa</span><h2>${eur(125)} a settimana</h2><p className="sub">Ripartita tra fondi, abbonamenti e conto principale</p></div>
+    </div>
+    <div className="card">
+      <span className="label">Strategia · le tre fasi</span>
+      <div>${phases.map((p, i) => html`<div key=${i} className="ev key" style=${{ '--c': p[2] }}><p className="when">${p[0]}</p><div><p style=${{ color: 'var(--ink)', fontSize: '15.5px' }}>${p[1]}</p></div></div>`)}</div>
+    </div>
+    <div className="card">
+      <div className="card-h"><span className="label">Checklist</span><span className="pill">${done} di ${total} completate</span></div>
+      <${Bar} p=${pct(done, total)} c="var(--ok)"/>
+      <div className="grid g3">
+        ${CHECKLIST.map(g => html`<div key=${g.g} style=${{ '--c': g.c }}>
+          <p className="eyebrow" style=${{ marginBottom: '6px' }}>${g.g}</p>
+          ${g.items.map(i => html`<label key=${i[0]} className=${'check' + (S.checks[i[0]] ? ' done' : '')}>
+            <input type="checkbox" checked=${!!S.checks[i[0]]} onChange=${() => toggle(i[0])}/><span>${i[1]}</span></label>`)}
+        </div>`)}
+      </div>
+    </div>
+    <div className="card">
+      <span className="label">Dati</span>
+      <p className="sub">Saldi, scenario, checklist e piano esami sono salvati su questo dispositivo.</p>
+      <div><button type="button" className=${'btn' + (armed ? ' arm' : '')} onClick=${() => { if (!armed) { setArmed(true); return; } setArmed(false); resetAll(); }}>${armed ? 'Tocca ancora per confermare' : 'Reimposta tutti i dati'}</button></div>
+    </div>`;
+}
+
+/* ================= App ================= */
+const NAV = [
+  ['oggi', 'Oggi', 'var(--ink2)'], ['studio', 'Studio', 'var(--study)'], ['giappone', 'Giappone', 'var(--jp)'],
+  ['copenaghen', 'Copenaghen', 'var(--cph)'], ['timeline', 'Timeline', '#8a6bbf'], ['piano', 'Piano', 'var(--ok)']
+];
+function App() {
+  const [S, setS] = usePersist('masterDashboard.v2', loadMoney);
+  const [E, setE] = usePersist('pianoEsami.mattia.v2', r => (r && r.plan && r.attend ? { tab: 'materie', passed: {}, ...r } : EXAM_DEFAULTS()));
+  const [view, setView] = usePersist('masterDashboard.view', r => (NAV.some(n => n[0] === r) ? r : 'oggi'));
+  const [, tick] = useState(0);
+  useEffect(() => { const f = () => { if (!document.hidden) tick(x => x + 1); }; document.addEventListener('visibilitychange', f); return () => document.removeEventListener('visibilitychange', f); }, []);
+  const sim = simulate(S.scen, { japan: S.japan, cph: S.cph }, S.lastDeposit);
+  const r2 = n => Math.round(n * 100) / 100;
+  const adjust = (fund, amt) => setS(s => {
+    const before = fund === 'japan' ? s.japan : s.cph;
+    const ns = { ...s };
+    if (fund === 'japan') ns.japan = r2(Math.min(TARGET_J, Math.max(0, s.japan + amt))); else ns.cph = r2(Math.max(0, s.cph + amt));
+    const after = fund === 'japan' ? ns.japan : ns.cph;
+    if (amt > 0 && after > before) ns.lastDeposit = iso(startOfDay(new Date()));
+    return ns;
   });
-  return out;
-}
-
-/* ---------- Vista Sessioni ---------- */
-function renderSessioni(){
-  const ex=exams(), out=[];
-  SESS.forEach(s=>{
-    const list=ex.filter(c=>state.plan[c.id]===s.k);
-    const cf=list.reduce((a,c)=>a+(c.cfa||0),0);
-    const sec=h('section',{class:'sec',id:'s-'+s.k},
-      h('div',{class:'sec-h'},h('h2',null,s.label+' '+s.year),h('span',{class:'meta'},list.length+' esami · '+cf+' CFA'+(list.some(c=>!c.cfa)?'+':''))));
-    if(s.k==='feb') sec.append(h('p',{class:'sess-note'},'Non c’è una sessione a gennaio: dopo dicembre la prossima è febbraio.'));
-    if(list.length){
-      sec.append(h('div',null,list.map(c=>h('div',{class:'srow'},
-        h('div',{class:'t'},h('strong',null,c.name),h('span',null,(c.cfa?c.cfa+' CFA':'CFA —')+(c.prof?' · '+c.prof:''))),
-        h('button',{type:'button',class:'x',onclick:()=>setPlan(c.id,s.k),'aria-label':'Togli '+c.name},'Togli')))));
-    }else sec.append(h('div',{class:'empty'},'Nessun esame in questa sessione.'));
-    const avail=ex.filter(c=>state.plan[c.id]!==s.k&&eligible(c,s));
-    if(avail.length){
-      const sel=h('select',{id:'add-'+s.k,'aria-label':'Aggiungi esame a '+s.label},
-        h('option',{value:''},'+ Aggiungi esame'),
-        avail.map(c=>h('option',{value:c.id},c.name+(state.plan[c.id]?' (ora in '+SESS.find(x=>x.k===state.plan[c.id]).short+')':''))));
-      sel.addEventListener('change',()=>{ if(sel.value){ state.plan[sel.value]=s.k; save(); render(); } });
-      sec.append(h('div',{class:'add'},sel));
-    }
-    out.push(sec);
+  const deposit = a => setS(s => {
+    const today = startOfDay(new Date()), ns = { ...s };
+    if (today < TRIP_END) { const t = Math.max(0, Math.min(a, TARGET_J - s.japan)); ns.japan = r2(s.japan + t); a -= t; }
+    ns.cph = r2(s.cph + a); ns.lastDeposit = iso(today); return ns;
   });
-  const free=ex.filter(c=>!SESS.some(s=>s.k===state.plan[c.id]));
-  const fsec=h('section',{class:'sec',id:'s-none'},h('div',{class:'sec-h'},h('h2',null,'Da programmare'),h('span',{class:'meta'},free.length+' esami')));
-  if(free.length){
-    fsec.append(h('div',null,free.map(c=>{
-      const ear=earliest(c);
-      return h('div',{class:'srow'},
-        h('div',{class:'t'},h('strong',null,c.name),h('span',null,ear?'Primo appello utile: '+ear.label.toLowerCase()+' '+ear.year:'')),
-        ear?h('button',{type:'button',class:'x',onclick:()=>setPlan(c.id,ear.k)},'Metti a '+ear.short):null);
-    })));
-  }else fsec.append(h('div',{class:'empty'},'Tutti gli esami hanno una sessione.'));
-  out.push(fsec);
-
-  const th=COURSES.find(c=>c.thesis);
-  if(!isDone(th)){
-    const d=DSESS.find(x=>x.k===state.plan[th.id]);
-    out.push(h('section',{class:'sec'},h('div',{class:'sec-h'},h('h2',null,'Diploma'),h('span',{class:'meta'},'8 CFA')),
-      h('div',{class:'srow'},h('div',{class:'t'},h('strong',null,'Elaborato di sintesi finale'),h('span',null,d?'Sessione di '+d.label.toLowerCase()+' '+d.year:'Sessione non scelta')),
-        h('button',{type:'button',class:'x',onclick:()=>go('materie','c-355')},'Cambia'))));
-  }
-  out.push(h('div',{class:'foot'},
-    'Sessioni dal Manifesto degli studi 2026/27. Le date dei singoli appelli escono sul sito qualche settimana prima di ogni sessione. Un esame si può dare solo dopo la fine delle lezioni.',
-    h('br'),resetBtn()));
-  return out;
+  const go = (v, arg) => {
+    if (v === '__check') { setS(s => ({ ...s, checks: { ...s.checks, [arg]: true } })); return; }
+    setView(v); window.scrollTo(0, 0);
+  };
+  const resetAll = () => { setS(MONEY_DEFAULTS()); setE(EXAM_DEFAULTS()); };
+  const now = new Date();
+  let page;
+  if (view === 'studio') page = html`<${Studio} E=${E} setE=${setE}/>`;
+  else if (view === 'giappone') page = html`<${Japan} S=${S} setS=${setS} sim=${sim} adjust=${adjust} go=${go}/>`;
+  else if (view === 'copenaghen') page = html`<${Cph} S=${S} sim=${sim} adjust=${adjust} go=${go}/>`;
+  else if (view === 'timeline') page = html`<${Timeline} S=${S} setS=${setS} sim=${sim}/>`;
+  else if (view === 'piano') page = html`<${Plan} S=${S} setS=${setS} resetAll=${resetAll}/>`;
+  else page = html`<${Home} S=${S} E=${E} sim=${sim} go=${go} deposit=${deposit} setE=${setE}/>`;
+  const exLeft = examApi(E).exams().length;
+  const badge = { studio: exLeft + ' esami', giappone: Math.round(pct(S.japan, TARGET_J)) + '%', copenaghen: Math.round(pct(S.cph, TARGET_C)) + '%' };
+  return html`
+    <div className="app">
+      <aside className="side">
+        <p className="brand">Master Dashboard<small>${cap(fmtDate(now, { weekday: 'long', day: 'numeric', month: 'long' }))}</small></p>
+        <nav className="snav" aria-label="Sezioni">
+          ${NAV.map(n => html`<button key=${n[0]} type="button" aria-current=${view === n[0] ? 'page' : 'false'} onClick=${() => go(n[0])}>
+            <i className="dot" style=${{ '--c': n[2] }}></i><span>${n[1]}</span>${badge[n[0]] ? html`<em>${badge[n[0]]}</em>` : null}</button>`)}
+        </nav>
+        <div className="side-foot"><p>Totale accantonato</p><b className="num">${eur(S.japan + S.cph)}</b></div>
+      </aside>
+      <main className="main">
+        <div className="inner">
+          <div className="mtop"><b>Master Dashboard</b><span>${eur(S.japan + S.cph)}</span></div>
+          ${page}
+        </div>
+      </main>
+      <nav className="tabs" aria-label="Sezioni"><div className="tabs-in">
+        ${NAV.map(n => html`<button key=${n[0]} type="button" aria-current=${view === n[0] ? 'page' : 'false'} onClick=${() => go(n[0])}>
+          <i className="dot" style=${{ '--c': n[2] }}></i><span>${n[1]}</span></button>`)}
+      </div></nav>
+    </div>`;
 }
-function resetBtn(){
-  let armed=false,timer;
-  const b=h('button',{type:'button'},'Ripristina la proposta iniziale');
-  b.addEventListener('click',()=>{
-    if(!armed){ armed=true; b.classList.add('arm'); b.textContent='Tocca di nuovo per confermare';
-      timer=setTimeout(()=>{armed=false;b.classList.remove('arm');b.textContent='Ripristina la proposta iniziale';},3500); return; }
-    clearTimeout(timer); const v=state.view; state=defaults(); state.view=v; state.bannerSeen=true; save(); render();
-  });
-  return b;
-}
-
-/* ---------- Vista Lezioni ---------- */
-function renderLezioni(){
-  const out=[];
-  const lay=byId('LAY'),eco=byId('ECO');
-  const sl=span(lay), se=span(eco);
-  const firstElective = sl.first<se.first?sl.first:se.first;
-  out.push(h('section',{class:'sec'},
-    h('div',{class:'sec-h'},h('h2',null,'Scadenze'),h('span',{class:'meta'},'1° semestre')),
-    h('div',{class:'dates'},
-      h('div',{class:'drow key'},h('time',null,fmt(addDays(firstElective,7),true)),h('div',null,'Ultimo giorno per inviare il modulo delle discipline a scelta (7 giorni dall’inizio di Layout). Da mandare dalla mail istituzionale a segreteria@abacatania.it.')),
-      h('div',{class:'drow'},h('time',null,fmt(sl.first,true)),h('div',null,'Prima lezione di Layout e tecniche di visualizzazione')),
-      h('div',{class:'drow'},h('time',null,fmt(se.first,true)),h('div',null,'Prima lezione di Ecodesign')),
-      h('div',{class:'drow'},h('time',null,'dic 2026'),h('div',null,'Sessione d’esame invernale')),
-      h('div',{class:'drow'},h('time',null,'3 feb 2027'),h('div',null,'Fine delle lezioni del 1° semestre')),
-      h('div',{class:'drow'},h('time',null,'feb 2027'),h('div',null,'Sessione d’esame primaverile'))
-    )));
-
-  const att=COURSES.filter(c=>!isDone(c)&&c.slots&&attends(c));
-  const sec=h('section',{class:'sec'},h('div',{class:'sec-h'},h('h2',null,'Settimana per settimana'),h('span',{class:'meta'},att.length+' corsi')));
-  sec.append(h('p',{class:'legend'},'Solo le materie che frequenti quest’anno. Puoi cambiarle dalla vista Materie.'));
-  const today=new Date();
-  Object.keys(WEEKS).map(Number).forEach(w=>{
-    if(w===11) sec.append(h('div',{class:'break'},'Pausa natalizia: 5 dicembre – 6 gennaio'));
-    const mon=toDate(WEEKS[w][0]);
-    const now=today>=mon&&today<addDays(mon,7);
-    const rows=[];
-    att.forEach(c=>c.slots.forEach(s=>{ if(s.w.includes(w)) rows.push({c,s}); }));
-    rows.sort((a,b)=>DAYS[a.s.d].first-DAYS[b.s.d].first||mins(a.s.t.split('-')[0])-mins(b.s.t.split('-')[0]));
-    const clashIds=new Set();
-    rows.forEach(a=>rows.forEach(b=>{ if(a!==b&&a.c!==b.c&&clashWeeks({slots:[a.s]},{slots:[b.s]}).includes(w)){clashIds.add(a.c.id);clashIds.add(b.c.id);} }));
-    const wk=h('div',{class:'week'+(now?' now':'')},
-      h('div',{class:'week-h'},h('strong',null,'Sett. '+w),h('span',null,(now?'questa settimana · ':'')+WEEKS[w][1])));
-    if(rows.length) rows.forEach(({c,s})=>wk.append(h('div',{class:'les'+(clashIds.has(c.id)?' clash':'')},
-      h('span',{class:'d'},DAYS[s.d].short+'\n'),
-      h('span',{class:'n'},c.name+(clashIds.has(c.id)?' · sovrapposizione':''),h('small',null,pretty(s.t)+' · '+s.p)))));
-    else wk.append(h('div',{class:'noles'},'Nessuna lezione'));
-    sec.append(wk);
-  });
-  out.push(sec);
-  out.push(h('p',{class:'foot'},'Dati dal palinsesto del 1° semestre 2026/27, versione del 6 ottobre 2026. Il palinsesto del 2° semestre (Fotografia digitale, Graphic design 3, Teoria e metodo dei mass media) non è ancora uscito.'));
-  return out;
-}
-
-/* ---------- Navigazione ---------- */
-function go(v,anchor){
-  state.view=v; save(); render();
-  requestAnimationFrame(()=>{
-    const el=anchor&&document.getElementById(anchor);
-    if(el) el.scrollIntoView({block:'start',behavior:'smooth'});
-    else document.getElementById('view').scrollIntoView({block:'start'});
-  });
-}
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.v)));
-document.getElementById('banner-ok').addEventListener('click',()=>{state.bannerSeen=true;save();render();});
-
-const THEMES=['auto','chiaro','scuro'];
-function applyTheme(){
-  const t=state.theme||'auto';
-  if(t==='chiaro') document.documentElement.setAttribute('data-theme','light');
-  else if(t==='scuro') document.documentElement.setAttribute('data-theme','dark');
-  else if(state.themeTouched) document.documentElement.removeAttribute('data-theme');
-  document.getElementById('theme').textContent='Tema: '+t;
-}
-document.getElementById('theme').addEventListener('click',()=>{
-  state.theme=THEMES[(THEMES.indexOf(state.theme||'auto')+1)%3]; state.themeTouched=true; save(); applyTheme();
-});
-applyTheme();
-
-function render(){
-  renderTop();
-  const v=state.view||'materie';
-  document.querySelectorAll('.nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.v===v?'page':'false'));
-  const view=document.getElementById('view');
-  view.replaceChildren(...(v==='sessioni'?renderSessioni():v==='lezioni'?renderLezioni():renderMaterie()));
-}
-render();
+ReactDOM.createRoot(document.getElementById('root')).render(html`<${App}/>`);
 </script>
 
 </body>
